@@ -21,6 +21,12 @@ defmodule CommercePlatformWeb.Router do
 
   scope "/api/v1", CommercePlatformWeb do
     pipe_through :api
+
+    forward "graphql", Absinthe.Plug, schema: CommercePlatformWeb.Schema
+
+    if Mix.env() == :dev do
+      forward "graphiql", Absinthe.Plug.GraphiQL, schema: CommercePlatformWeb.Schema
+    end
   end
 
   # Enables LiveDashboard only for development
