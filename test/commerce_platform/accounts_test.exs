@@ -10,17 +10,17 @@ defmodule CommercePlatform.AccountsTest do
       email: "some email",
       first_name: "some first_name",
       last_name: "some last_name",
-      pashword_hash: "some pashword_hash",
+      password_hash: "some password_hash",
       role: "some role"
     }
     @update_attrs %{
       email: "some updated email",
       first_name: "some updated first_name",
       last_name: "some updated last_name",
-      pashword_hash: "some updated pashword_hash",
+      password_hash: "some updated password_hash",
       role: "some updated role"
     }
-    @invalid_attrs %{email: nil, first_name: nil, last_name: nil, pashword_hash: nil, role: nil}
+    @invalid_attrs %{email: nil, first_name: nil, last_name: nil, password_hash: nil, role: nil}
 
     def user_fixture(attrs \\ %{}) do
       {:ok, user} =
@@ -46,7 +46,7 @@ defmodule CommercePlatform.AccountsTest do
       assert user.email == "some email"
       assert user.first_name == "some first_name"
       assert user.last_name == "some last_name"
-      assert user.pashword_hash == "some pashword_hash"
+      assert user.password_hash == "some password_hash"
       assert user.role == "some role"
     end
 
@@ -60,7 +60,7 @@ defmodule CommercePlatform.AccountsTest do
       assert user.email == "some updated email"
       assert user.first_name == "some updated first_name"
       assert user.last_name == "some updated last_name"
-      assert user.pashword_hash == "some updated pashword_hash"
+      assert user.password_hash == "some updated password_hash"
       assert user.role == "some updated role"
     end
 

@@ -6,7 +6,7 @@ defmodule CommercePlatform.Accounts.User do
     field :email, :string
     field :first_name, :string
     field :last_name, :string
-    field :pashword_hash, :string
+    field :password_hash, :string
     field :role, :string
 
     timestamps()
@@ -15,7 +15,7 @@ defmodule CommercePlatform.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:first_name, :last_name, :email, :pashword_hash, :role])
-    |> validate_required([:first_name, :last_name, :email, :pashword_hash, :role])
+    |> cast(attrs, [:first_name, :last_name, :email, :password_hash, :role])
+    |> validate_required([:first_name, :last_name, :email, :password_hash, :role])
   end
 end
