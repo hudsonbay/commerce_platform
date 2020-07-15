@@ -1,7 +1,7 @@
 defmodule CommercePlatformWeb.Schema do
   use Absinthe.Schema
 
-  # import Types
+  import_types(CommercePlatformWeb.Schema.Types)
 
   query do
   end
