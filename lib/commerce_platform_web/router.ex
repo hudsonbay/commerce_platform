@@ -19,10 +19,9 @@ defmodule CommercePlatformWeb.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", CommercePlatformWeb do
-  #   pipe_through :api
-  # end
+  scope "/api/v1", CommercePlatformWeb do
+    pipe_through :api
+  end
 
   # Enables LiveDashboard only for development
   #
