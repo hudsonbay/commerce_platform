@@ -49,7 +49,8 @@ defmodule CommercePlatform.MixProject do
       {:argon2_elixir, "~> 2.0"},
       {:absinthe, "~> 1.4.0"},
       {:absinthe_plug, "~> 1.4.0"},
-      {:absinthe_ecto, "~> 0.1.3"}
+      {:absinthe_ecto, "~> 0.1.3"},
+      {:guardian, "~> 2.0"}
     ]
   end
 
