@@ -26,6 +26,11 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# Use Guardian for token based authentication
+config :commerce_platform, CommercePlatform.Guardian,
+  issuer: "commerce_platform",
+  secret_key: "sgjJQtwfTCCNNLKvW0UHSrVciRaxzBJJgOyCFn3Zk2i1HMIlz7x42axHf1+psqsb"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
