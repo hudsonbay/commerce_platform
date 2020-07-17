@@ -12,6 +12,7 @@ defmodule CommercePlatformWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug CommercePlatformWeb.Plugs.Context
   end
 
   scope "/", CommercePlatformWeb do
