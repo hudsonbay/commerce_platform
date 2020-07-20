@@ -9,7 +9,7 @@ defmodule CommercePlatformWeb.Schema do
   query do
     @desc "Get a list of a all users"
     field :users, list_of(:user_type) do
-      # middleware(Middleware.Authorize, "admin")
+      middleware(Middleware.Authorize, "admin")
       resolve(&Resolvers.UserResolver.users/3)
     end
   end
