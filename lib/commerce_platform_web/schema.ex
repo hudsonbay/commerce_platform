@@ -2,12 +2,14 @@ defmodule CommercePlatformWeb.Schema do
   use Absinthe.Schema
 
   alias CommercePlatformWeb.Resolvers
+  alias CommercePlatformWeb.Schema.Middleware
 
   import_types(CommercePlatformWeb.Schema.Types)
 
   query do
     @desc "Get a list of a all users"
     field :users, list_of(:user_type) do
+      # middleware(Middleware.Authorize, "admin")
       resolve(&Resolvers.UserResolver.users/3)
     end
   end
