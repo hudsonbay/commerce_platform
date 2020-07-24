@@ -2,18 +2,17 @@ defmodule CommercePlatform.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias CommercePlatform.World.Country
-
   schema "users" do
     field :email, :string, unique: true
     field :first_name, :string
     field :last_name, :string
+    field :phone, :string
+    field :role, :string, default: "user"
+
     field :password_hash, :string
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
-    field :role, :string, default: "user"
 
-    field :phone, :string
     field :shipping_address, :string
     field :shipping_city, :string
     field :shipping_region, :string
