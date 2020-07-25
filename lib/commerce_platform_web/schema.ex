@@ -12,6 +12,12 @@ defmodule CommercePlatformWeb.Schema do
       middleware(Middleware.Authorize, "admin")
       resolve(&Resolvers.UserResolver.users/3)
     end
+
+    @desc "Get a list of all products"
+    field :products, list_of(:product_type) do
+      # middleware(Middleware.Authorize, "user")
+      resolve(&Resolvers.ProductResolver.products/3)
+    end
   end
 
   mutation do
