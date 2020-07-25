@@ -6,6 +6,7 @@ defmodule CommercePlatform.Stock.Product do
     field :name, :string
     field :price, :float
     field :description, :string
+    field :stock, :integer
     field :size, :float
     field :weight, :float
     field :image, :string
@@ -17,7 +18,7 @@ defmodule CommercePlatform.Stock.Product do
   @doc false
   def changeset(product, attrs) do
     product
-    |> cast(attrs, [:name, :price, :weight, :size, :description, :thumbnail, :image])
-    |> validate_required([:name, :price, :weight, :size, :description, :thumbnail, :image])
+    |> cast(attrs, [:name, :price, :stock, :weight, :size, :description, :thumbnail, :image])
+    |> validate_required([:name, :price, :stock, :weight, :size, :description, :thumbnail, :image])
   end
 end
