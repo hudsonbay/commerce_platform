@@ -30,7 +30,9 @@ defmodule CommercePlatform.MeasurementsTest do
     end
 
     test "create_measurement_type/1 with valid data creates a measurement_type" do
-      assert {:ok, %MeasurementType{} = measurement_type} = Measurements.create_measurement_type(@valid_attrs)
+      assert {:ok, %MeasurementType{} = measurement_type} =
+               Measurements.create_measurement_type(@valid_attrs)
+
       assert measurement_type.type == "some type"
     end
 
@@ -40,20 +42,29 @@ defmodule CommercePlatform.MeasurementsTest do
 
     test "update_measurement_type/2 with valid data updates the measurement_type" do
       measurement_type = measurement_type_fixture()
-      assert {:ok, %MeasurementType{} = measurement_type} = Measurements.update_measurement_type(measurement_type, @update_attrs)
+
+      assert {:ok, %MeasurementType{} = measurement_type} =
+               Measurements.update_measurement_type(measurement_type, @update_attrs)
+
       assert measurement_type.type == "some updated type"
     end
 
     test "update_measurement_type/2 with invalid data returns error changeset" do
       measurement_type = measurement_type_fixture()
-      assert {:error, %Ecto.Changeset{}} = Measurements.update_measurement_type(measurement_type, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Measurements.update_measurement_type(measurement_type, @invalid_attrs)
+
       assert measurement_type == Measurements.get_measurement_type!(measurement_type.id)
     end
 
     test "delete_measurement_type/1 deletes the measurement_type" do
       measurement_type = measurement_type_fixture()
       assert {:ok, %MeasurementType{}} = Measurements.delete_measurement_type(measurement_type)
-      assert_raise Ecto.NoResultsError, fn -> Measurements.get_measurement_type!(measurement_type.id) end
+
+      assert_raise Ecto.NoResultsError, fn ->
+        Measurements.get_measurement_type!(measurement_type.id)
+      end
     end
 
     test "change_measurement_type/1 returns a measurement_type changeset" do
@@ -89,7 +100,9 @@ defmodule CommercePlatform.MeasurementsTest do
     end
 
     test "create_measurement_unit/1 with valid data creates a measurement_unit" do
-      assert {:ok, %MeasurementUnit{} = measurement_unit} = Measurements.create_measurement_unit(@valid_attrs)
+      assert {:ok, %MeasurementUnit{} = measurement_unit} =
+               Measurements.create_measurement_unit(@valid_attrs)
+
       assert measurement_unit.unit_name == "some unit_name"
     end
 
@@ -99,20 +112,29 @@ defmodule CommercePlatform.MeasurementsTest do
 
     test "update_measurement_unit/2 with valid data updates the measurement_unit" do
       measurement_unit = measurement_unit_fixture()
-      assert {:ok, %MeasurementUnit{} = measurement_unit} = Measurements.update_measurement_unit(measurement_unit, @update_attrs)
+
+      assert {:ok, %MeasurementUnit{} = measurement_unit} =
+               Measurements.update_measurement_unit(measurement_unit, @update_attrs)
+
       assert measurement_unit.unit_name == "some updated unit_name"
     end
 
     test "update_measurement_unit/2 with invalid data returns error changeset" do
       measurement_unit = measurement_unit_fixture()
-      assert {:error, %Ecto.Changeset{}} = Measurements.update_measurement_unit(measurement_unit, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Measurements.update_measurement_unit(measurement_unit, @invalid_attrs)
+
       assert measurement_unit == Measurements.get_measurement_unit!(measurement_unit.id)
     end
 
     test "delete_measurement_unit/1 deletes the measurement_unit" do
       measurement_unit = measurement_unit_fixture()
       assert {:ok, %MeasurementUnit{}} = Measurements.delete_measurement_unit(measurement_unit)
-      assert_raise Ecto.NoResultsError, fn -> Measurements.get_measurement_unit!(measurement_unit.id) end
+
+      assert_raise Ecto.NoResultsError, fn ->
+        Measurements.get_measurement_unit!(measurement_unit.id)
+      end
     end
 
     test "change_measurement_unit/1 returns a measurement_unit changeset" do

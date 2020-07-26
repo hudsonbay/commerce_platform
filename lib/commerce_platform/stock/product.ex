@@ -11,7 +11,7 @@ defmodule CommercePlatform.Stock.Product do
     field :weight, :float
     field :image, :string
     field :thumbnail, :string
-
+    # TODO: add unidad_de_medida
     timestamps()
   end
 

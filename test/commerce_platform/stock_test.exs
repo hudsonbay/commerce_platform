@@ -6,9 +6,33 @@ defmodule CommercePlatform.StockTest do
   describe "products" do
     alias CommercePlatform.Stock.Product
 
-    @valid_attrs %{description: "some description", image: "some image", name: "some name", price: 120.5, size: 120.5, thumbnail: "some thumbnail", weight: 120.5}
-    @update_attrs %{description: "some updated description", image: "some updated image", name: "some updated name", price: 456.7, size: 456.7, thumbnail: "some updated thumbnail", weight: 456.7}
-    @invalid_attrs %{description: nil, image: nil, name: nil, price: nil, size: nil, thumbnail: nil, weight: nil}
+    @valid_attrs %{
+      description: "some description",
+      image: "some image",
+      name: "some name",
+      price: 120.5,
+      size: 120.5,
+      thumbnail: "some thumbnail",
+      weight: 120.5
+    }
+    @update_attrs %{
+      description: "some updated description",
+      image: "some updated image",
+      name: "some updated name",
+      price: 456.7,
+      size: 456.7,
+      thumbnail: "some updated thumbnail",
+      weight: 456.7
+    }
+    @invalid_attrs %{
+      description: nil,
+      image: nil,
+      name: nil,
+      price: nil,
+      size: nil,
+      thumbnail: nil,
+      weight: nil
+    }
 
     def product_fixture(attrs \\ %{}) do
       {:ok, product} =
@@ -71,6 +95,67 @@ defmodule CommercePlatform.StockTest do
     test "change_product/1 returns a product changeset" do
       product = product_fixture()
       assert %Ecto.Changeset{} = Stock.change_product(product)
+    end
+  end
+
+  describe "product_categories" do
+    alias CommercePlatform.Stock.ProductCategory
+
+    @valid_attrs %{description: "some description", name: "some name"}
+    @update_attrs %{description: "some updated description", name: "some updated name"}
+    @invalid_attrs %{description: nil, name: nil}
+
+    def product_category_fixture(attrs \\ %{}) do
+      {:ok, product_category} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Stock.create_product_category()
+
+      product_category
+    end
+
+    test "list_product_categories/0 returns all product_categories" do
+      product_category = product_category_fixture()
+      assert Stock.list_product_categories() == [product_category]
+    end
+
+    test "get_product_category!/1 returns the product_category with given id" do
+      product_category = product_category_fixture()
+      assert Stock.get_product_category!(product_category.id) == product_category
+    end
+
+    test "create_product_category/1 with valid data creates a product_category" do
+      assert {:ok, %ProductCategory{} = product_category} = Stock.create_product_category(@valid_attrs)
+      assert product_category.description == "some description"
+      assert product_category.name == "some name"
+    end
+
+    test "create_product_category/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Stock.create_product_category(@invalid_attrs)
+    end
+
+    test "update_product_category/2 with valid data updates the product_category" do
+      product_category = product_category_fixture()
+      assert {:ok, %ProductCategory{} = product_category} = Stock.update_product_category(product_category, @update_attrs)
+      assert product_category.description == "some updated description"
+      assert product_category.name == "some updated name"
+    end
+
+    test "update_product_category/2 with invalid data returns error changeset" do
+      product_category = product_category_fixture()
+      assert {:error, %Ecto.Changeset{}} = Stock.update_product_category(product_category, @invalid_attrs)
+      assert product_category == Stock.get_product_category!(product_category.id)
+    end
+
+    test "delete_product_category/1 deletes the product_category" do
+      product_category = product_category_fixture()
+      assert {:ok, %ProductCategory{}} = Stock.delete_product_category(product_category)
+      assert_raise Ecto.NoResultsError, fn -> Stock.get_product_category!(product_category.id) end
+    end
+
+    test "change_product_category/1 returns a product_category changeset" do
+      product_category = product_category_fixture()
+      assert %Ecto.Changeset{} = Stock.change_product_category(product_category)
     end
   end
 end

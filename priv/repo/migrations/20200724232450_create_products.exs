@@ -13,6 +13,5 @@ defmodule CommercePlatform.Repo.Migrations.CreateProducts do
 
       timestamps()
     end
-
   end
 end

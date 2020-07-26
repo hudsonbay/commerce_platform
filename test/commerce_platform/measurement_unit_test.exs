@@ -30,7 +30,9 @@ defmodule CommercePlatform.MeasurementUnitTest do
     end
 
     test "create_measurement_type/1 with valid data creates a measurement_type" do
-      assert {:ok, %MeasurementType{} = measurement_type} = MeasurementUnit.create_measurement_type(@valid_attrs)
+      assert {:ok, %MeasurementType{} = measurement_type} =
+               MeasurementUnit.create_measurement_type(@valid_attrs)
+
       assert measurement_type.type == "some type"
     end
 
@@ -40,20 +42,29 @@ defmodule CommercePlatform.MeasurementUnitTest do
 
     test "update_measurement_type/2 with valid data updates the measurement_type" do
       measurement_type = measurement_type_fixture()
-      assert {:ok, %MeasurementType{} = measurement_type} = MeasurementUnit.update_measurement_type(measurement_type, @update_attrs)
+
+      assert {:ok, %MeasurementType{} = measurement_type} =
+               MeasurementUnit.update_measurement_type(measurement_type, @update_attrs)
+
       assert measurement_type.type == "some updated type"
     end
 
     test "update_measurement_type/2 with invalid data returns error changeset" do
       measurement_type = measurement_type_fixture()
-      assert {:error, %Ecto.Changeset{}} = MeasurementUnit.update_measurement_type(measurement_type, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               MeasurementUnit.update_measurement_type(measurement_type, @invalid_attrs)
+
       assert measurement_type == MeasurementUnit.get_measurement_type!(measurement_type.id)
     end
 
     test "delete_measurement_type/1 deletes the measurement_type" do
       measurement_type = measurement_type_fixture()
       assert {:ok, %MeasurementType{}} = MeasurementUnit.delete_measurement_type(measurement_type)
-      assert_raise Ecto.NoResultsError, fn -> MeasurementUnit.get_measurement_type!(measurement_type.id) end
+
+      assert_raise Ecto.NoResultsError, fn ->
+        MeasurementUnit.get_measurement_type!(measurement_type.id)
+      end
     end
 
     test "change_measurement_type/1 returns a measurement_type changeset" do

@@ -7,7 +7,7 @@ defmodule CommercePlatformWeb.Schema do
   import_types(CommercePlatformWeb.Schema.Types)
 
   query do
-    @desc "Get a list of a all users"
+    @desc "Get a list of all users"
     field :users, list_of(:user_type) do
       middleware(Middleware.Authorize, "admin")
       resolve(&Resolvers.UserResolver.users/3)
@@ -15,8 +15,13 @@ defmodule CommercePlatformWeb.Schema do
 
     @desc "Get a list of all products"
     field :products, list_of(:product_type) do
-      # middleware(Middleware.Authorize, "user")
+      # middleware(Middleware.Authorize, :any)
       resolve(&Resolvers.ProductResolver.products/3)
+    end
+
+    @desc "Get a list of all product categories"
+    field :product_categories, list_of(:product_category_type) do
+      resolve(&Resolvers.ProductCategoryResolver.product_categories/3)
     end
   end
 
@@ -31,6 +36,20 @@ defmodule CommercePlatformWeb.Schema do
     field :login_user, type: :session_type do
       arg(:input, non_null(:session_input_type))
       resolve(&Resolvers.SessionResolver.login_user/3)
+    end
+
+    @desc "Insert new product"
+    field :insert_product, type: :product_type do
+      arg(:input, non_null(:product_input_type))
+      middleware(Middleware.Authorize, "admin")
+      resolve(&Resolvers.ProductResolver.insert_product/3)
+    end
+
+    @desc "insert new product category"
+    field :insert_product_category, type: :product_category_type do
+      arg(:input, non_null(:product_category_input_type))
+      middleware(Middleware.Authorize, "admin")
+      resolve(&Resolvers.ProductCategoryResolver.insert_product_category/3)
     end
   end
 
