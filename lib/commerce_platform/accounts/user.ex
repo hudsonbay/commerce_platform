@@ -19,7 +19,7 @@ defmodule CommercePlatform.Accounts.User do
     field :shipping_state, :string
     field :shipping_postal_code, :string
 
-    field :billing_addres, :string
+    field :billing_address, :string
     field :billing_city, :string
     field :billing_region, :string
     field :billing_state, :string
@@ -35,7 +35,24 @@ defmodule CommercePlatform.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:first_name, :last_name, :email, :password, :password_confirmation, :role])
+    |> cast(attrs, [
+      :first_name,
+      :last_name,
+      :email,
+      :password,
+      :password_confirmation,
+      :role,
+      :shipping_address,
+      :shipping_city,
+      :shipping_region,
+      :shipping_state,
+      :shipping_postal_code,
+      :billing_address,
+      :billing_city,
+      :billing_region,
+      :billing_state,
+      :billing_postal_code
+    ])
     |> validate_required([
       :first_name,
       :last_name,

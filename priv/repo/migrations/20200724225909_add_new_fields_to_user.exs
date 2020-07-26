@@ -9,7 +9,7 @@ defmodule CommercePlatform.Repo.Migrations.AddNewaddsToUser do
       add :shipping_region, :string
       add :shipping_state, :string
       add :shipping_postal_code, :string
-      add :billing_addres, :string
+      add :billing_address, :string
       add :billing_city, :string
       add :billing_region, :string
       add :billing_state, :string
