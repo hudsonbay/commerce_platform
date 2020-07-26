@@ -1,5 +1,6 @@
 defmodule CommercePlatformWeb.Schema.Types.ProductType do
   use Absinthe.Schema.Notation
+  use Absinthe.Ecto, repo: CommercePlatform.Repo
 
   object :product_type do
     field(:id, :id)
@@ -11,6 +12,7 @@ defmodule CommercePlatformWeb.Schema.Types.ProductType do
     field(:weight, :float)
     field(:image, :string)
     field(:thumbnail, :string)
+    field(:product_category, :product_category_type, resolve: assoc(:product_category))
   end
 
   input_object :product_input_type do
@@ -22,5 +24,6 @@ defmodule CommercePlatformWeb.Schema.Types.ProductType do
     field(:weight, non_null(:float))
     field(:image, non_null(:string))
     field(:thumbnail, non_null(:string))
+    field(:product_category_id, non_null(:id))
   end
 end
