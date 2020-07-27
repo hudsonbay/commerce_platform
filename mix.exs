@@ -19,9 +19,8 @@ defmodule CommercePlatform.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      applications: [:timex],
       mod: {CommercePlatform.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :timex]
     ]
   end
 
