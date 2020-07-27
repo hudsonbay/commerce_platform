@@ -19,6 +19,7 @@ defmodule CommercePlatform.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
+      applications: [:timex],
       mod: {CommercePlatform.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
@@ -52,7 +53,8 @@ defmodule CommercePlatform.MixProject do
       {:absinthe, "~> 1.4.0"},
       {:absinthe_plug, "~> 1.4.0"},
       {:absinthe_ecto, "~> 0.1.3"},
-      {:guardian, "~> 2.0"}
+      {:guardian, "~> 2.0"},
+      {:timex, "~> 3.5"}
     ]
   end
 
