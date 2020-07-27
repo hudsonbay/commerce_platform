@@ -13,6 +13,12 @@ defmodule CommercePlatformWeb.Schema do
       resolve(&Resolvers.UserResolver.users/3)
     end
 
+    @desc "Get a user"
+    field :find_user, type: :user_type do
+      arg(:id, non_null(:id))
+      resolve(&Resolvers.UserResolver.find_user/2)
+    end
+
     @desc "Get a list of all products"
     field :products, list_of(:product_type) do
       # middleware(Middleware.Authorize, :any)
