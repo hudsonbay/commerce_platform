@@ -67,4 +67,73 @@ defmodule CommercePlatform.OrdersTest do
       assert %Ecto.Changeset{} = Orders.change_order(order)
     end
   end
+
+  describe "shippers" do
+    alias CommercePlatform.Orders.Shipper
+
+    @valid_attrs %{company_name: "some company_name", description: "some description", email: "some email", phone: "some phone", picture: "some picture", website: "some website"}
+    @update_attrs %{company_name: "some updated company_name", description: "some updated description", email: "some updated email", phone: "some updated phone", picture: "some updated picture", website: "some updated website"}
+    @invalid_attrs %{company_name: nil, description: nil, email: nil, phone: nil, picture: nil, website: nil}
+
+    def shipper_fixture(attrs \\ %{}) do
+      {:ok, shipper} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Orders.create_shipper()
+
+      shipper
+    end
+
+    test "list_shippers/0 returns all shippers" do
+      shipper = shipper_fixture()
+      assert Orders.list_shippers() == [shipper]
+    end
+
+    test "get_shipper!/1 returns the shipper with given id" do
+      shipper = shipper_fixture()
+      assert Orders.get_shipper!(shipper.id) == shipper
+    end
+
+    test "create_shipper/1 with valid data creates a shipper" do
+      assert {:ok, %Shipper{} = shipper} = Orders.create_shipper(@valid_attrs)
+      assert shipper.company_name == "some company_name"
+      assert shipper.description == "some description"
+      assert shipper.email == "some email"
+      assert shipper.phone == "some phone"
+      assert shipper.picture == "some picture"
+      assert shipper.website == "some website"
+    end
+
+    test "create_shipper/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Orders.create_shipper(@invalid_attrs)
+    end
+
+    test "update_shipper/2 with valid data updates the shipper" do
+      shipper = shipper_fixture()
+      assert {:ok, %Shipper{} = shipper} = Orders.update_shipper(shipper, @update_attrs)
+      assert shipper.company_name == "some updated company_name"
+      assert shipper.description == "some updated description"
+      assert shipper.email == "some updated email"
+      assert shipper.phone == "some updated phone"
+      assert shipper.picture == "some updated picture"
+      assert shipper.website == "some updated website"
+    end
+
+    test "update_shipper/2 with invalid data returns error changeset" do
+      shipper = shipper_fixture()
+      assert {:error, %Ecto.Changeset{}} = Orders.update_shipper(shipper, @invalid_attrs)
+      assert shipper == Orders.get_shipper!(shipper.id)
+    end
+
+    test "delete_shipper/1 deletes the shipper" do
+      shipper = shipper_fixture()
+      assert {:ok, %Shipper{}} = Orders.delete_shipper(shipper)
+      assert_raise Ecto.NoResultsError, fn -> Orders.get_shipper!(shipper.id) end
+    end
+
+    test "change_shipper/1 returns a shipper changeset" do
+      shipper = shipper_fixture()
+      assert %Ecto.Changeset{} = Orders.change_shipper(shipper)
+    end
+  end
 end

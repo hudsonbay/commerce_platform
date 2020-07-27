@@ -101,4 +101,100 @@ defmodule CommercePlatform.Orders do
   def change_order(%Order{} = order, attrs \\ %{}) do
     Order.changeset(order, attrs)
   end
+
+  alias CommercePlatform.Orders.Shipper
+
+  @doc """
+  Returns the list of shippers.
+
+  ## Examples
+
+      iex> list_shippers()
+      [%Shipper{}, ...]
+
+  """
+  def list_shippers do
+    Repo.all(Shipper)
+  end
+
+  @doc """
+  Gets a single shipper.
+
+  Raises `Ecto.NoResultsError` if the Shipper does not exist.
+
+  ## Examples
+
+      iex> get_shipper!(123)
+      %Shipper{}
+
+      iex> get_shipper!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_shipper!(id), do: Repo.get!(Shipper, id)
+
+  @doc """
+  Creates a shipper.
+
+  ## Examples
+
+      iex> create_shipper(%{field: value})
+      {:ok, %Shipper{}}
+
+      iex> create_shipper(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_shipper(attrs \\ %{}) do
+    %Shipper{}
+    |> Shipper.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a shipper.
+
+  ## Examples
+
+      iex> update_shipper(shipper, %{field: new_value})
+      {:ok, %Shipper{}}
+
+      iex> update_shipper(shipper, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_shipper(%Shipper{} = shipper, attrs) do
+    shipper
+    |> Shipper.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a shipper.
+
+  ## Examples
+
+      iex> delete_shipper(shipper)
+      {:ok, %Shipper{}}
+
+      iex> delete_shipper(shipper)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_shipper(%Shipper{} = shipper) do
+    Repo.delete(shipper)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking shipper changes.
+
+  ## Examples
+
+      iex> change_shipper(shipper)
+      %Ecto.Changeset{data: %Shipper{}}
+
+  """
+  def change_shipper(%Shipper{} = shipper, attrs \\ %{}) do
+    Shipper.changeset(shipper, attrs)
+  end
 end
