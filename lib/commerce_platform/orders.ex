@@ -197,4 +197,100 @@ defmodule CommercePlatform.Orders do
   def change_shipper(%Shipper{} = shipper, attrs \\ %{}) do
     Shipper.changeset(shipper, attrs)
   end
+
+  alias CommercePlatform.Orders.OrderDetail
+
+  @doc """
+  Returns the list of order_details.
+
+  ## Examples
+
+      iex> list_order_details()
+      [%OrderDetail{}, ...]
+
+  """
+  def list_order_details do
+    Repo.all(OrderDetail)
+  end
+
+  @doc """
+  Gets a single order_detail.
+
+  Raises `Ecto.NoResultsError` if the Order detail does not exist.
+
+  ## Examples
+
+      iex> get_order_detail!(123)
+      %OrderDetail{}
+
+      iex> get_order_detail!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_order_detail!(id), do: Repo.get!(OrderDetail, id)
+
+  @doc """
+  Creates a order_detail.
+
+  ## Examples
+
+      iex> create_order_detail(%{field: value})
+      {:ok, %OrderDetail{}}
+
+      iex> create_order_detail(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_order_detail(attrs \\ %{}) do
+    %OrderDetail{}
+    |> OrderDetail.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a order_detail.
+
+  ## Examples
+
+      iex> update_order_detail(order_detail, %{field: new_value})
+      {:ok, %OrderDetail{}}
+
+      iex> update_order_detail(order_detail, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_order_detail(%OrderDetail{} = order_detail, attrs) do
+    order_detail
+    |> OrderDetail.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a order_detail.
+
+  ## Examples
+
+      iex> delete_order_detail(order_detail)
+      {:ok, %OrderDetail{}}
+
+      iex> delete_order_detail(order_detail)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_order_detail(%OrderDetail{} = order_detail) do
+    Repo.delete(order_detail)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking order_detail changes.
+
+  ## Examples
+
+      iex> change_order_detail(order_detail)
+      %Ecto.Changeset{data: %OrderDetail{}}
+
+  """
+  def change_order_detail(%OrderDetail{} = order_detail, attrs \\ %{}) do
+    OrderDetail.changeset(order_detail, attrs)
+  end
 end
