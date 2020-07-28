@@ -1,5 +1,30 @@
-# CommercePlatform
+# Commerce Platform
 
+## Description
+
+A GraphQL API of an e-commerce platform
+
+
+## Functional requirements
+  * Registration
+  * Password on the database must be hashed (I used Argon2 for that)
+  * User login using JWT
+  * Role-based access control (admin, user)
+  * Admins can see the lists of users
+  * CRUDS to these entities:
+    * Products
+    * Product categories
+  * Products must have a stock field, if a product is not on the stock it won't be showed/offered to the user
+
+## Some notes:
+  * Some dummy data will be inserted into the database for you to try things quickly. I did this for you ;)
+  * I'm an Elixir beginner, so if you see any issues or bad practice(s), please let me know, it would help me a lot. I want to learn.
+
+## Database diagram
+If you want to see the databse schema you will be able to see it in this picture
+
+
+## Installation
 To start your Phoenix server:
 
   * Setup the project with `mix setup`
@@ -16,3 +41,9 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+## Contact me
+If you have doubts & || suggestions, please reach me out at:
+* manuelmenendezalfonso@gmail.com
+* @manuelmenendez on Telegram
+* @manuelm662 on Twitter

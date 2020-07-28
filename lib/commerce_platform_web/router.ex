@@ -4,25 +4,32 @@ defmodule CommercePlatformWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :fetch_flash
+    plug :fetch_live_flash
+    plug :put_root_layout, {CommercePlatformWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug CommercePlatformWeb.Plugs.Context
   end
 
   scope "/", CommercePlatformWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", PageLive, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", CommercePlatformWeb do
-  #   pipe_through :api
-  # end
+  scope "/api/v1" do
+    pipe_through :api
+
+    forward "/graphql", Absinthe.Plug, schema: CommercePlatformWeb.Schema
+
+    if Mix.env() == :dev do
+      forward "/graphiql", Absinthe.Plug.GraphiQL, schema: CommercePlatformWeb.Schema
+    end
+  end
 
   # Enables LiveDashboard only for development
   #
