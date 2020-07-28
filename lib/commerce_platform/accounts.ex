@@ -101,4 +101,100 @@ defmodule CommercePlatform.Accounts do
   def change_user(%User{} = user, attrs \\ %{}) do
     User.changeset(user, attrs)
   end
+
+  alias CommercePlatform.Accounts.MembershipType
+
+  @doc """
+  Returns the list of membership_types.
+
+  ## Examples
+
+      iex> list_membership_types()
+      [%MembershipType{}, ...]
+
+  """
+  def list_membership_types do
+    Repo.all(MembershipType)
+  end
+
+  @doc """
+  Gets a single membership_type.
+
+  Raises `Ecto.NoResultsError` if the Membership type does not exist.
+
+  ## Examples
+
+      iex> get_membership_type!(123)
+      %MembershipType{}
+
+      iex> get_membership_type!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_membership_type!(id), do: Repo.get!(MembershipType, id)
+
+  @doc """
+  Creates a membership_type.
+
+  ## Examples
+
+      iex> create_membership_type(%{field: value})
+      {:ok, %MembershipType{}}
+
+      iex> create_membership_type(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_membership_type(attrs \\ %{}) do
+    %MembershipType{}
+    |> MembershipType.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a membership_type.
+
+  ## Examples
+
+      iex> update_membership_type(membership_type, %{field: new_value})
+      {:ok, %MembershipType{}}
+
+      iex> update_membership_type(membership_type, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_membership_type(%MembershipType{} = membership_type, attrs) do
+    membership_type
+    |> MembershipType.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a membership_type.
+
+  ## Examples
+
+      iex> delete_membership_type(membership_type)
+      {:ok, %MembershipType{}}
+
+      iex> delete_membership_type(membership_type)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_membership_type(%MembershipType{} = membership_type) do
+    Repo.delete(membership_type)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking membership_type changes.
+
+  ## Examples
+
+      iex> change_membership_type(membership_type)
+      %Ecto.Changeset{data: %MembershipType{}}
+
+  """
+  def change_membership_type(%MembershipType{} = membership_type, attrs \\ %{}) do
+    MembershipType.changeset(membership_type, attrs)
+  end
 end

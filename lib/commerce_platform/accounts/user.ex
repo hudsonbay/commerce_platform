@@ -2,12 +2,15 @@ defmodule CommercePlatform.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias CommercePlatform.Accounts.MembershipType
+
   schema "users" do
     field :email, :string, unique: true
     field :first_name, :string
     field :last_name, :string
     field :phone, :string
     field :role, :string, default: "user"
+    belongs_to(:membership_type, MembershipType)
 
     field :password_hash, :string
     field :password, :string, virtual: true
@@ -28,6 +31,7 @@ defmodule CommercePlatform.Accounts.User do
     # TODO: add these fields credit_card, credit_card_type_id, shipping_country_id belongs_to :country, Country, field :shipping_country, :string, 
     # field :billing_country, :string
     # TODO: see if there's gonna be an address 1 and address 2, and subsequently a default address
+    # TODO: Que al registrar un nuevo usuario tenga  por defecto el campo membership_type_id con la referencia al id 1 :none y que sea requerido
 
     timestamps()
   end

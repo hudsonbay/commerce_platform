@@ -14,6 +14,7 @@ alias CommercePlatform.Measurements.MeasurementType
 alias CommercePlatform.Measurements.MeasurementUnit
 alias CommercePlatform.Stock.ProductCategory
 alias CommercePlatform.Stock.ProductSubcategory
+alias CommercePlatform.Accounts.MembershipType
 
 # inserting measurement types
 CommercePlatform.Repo.insert!(%MeasurementType{type: "Length"})
@@ -263,4 +264,23 @@ CommercePlatform.Repo.insert!(%ProductSubcategory{
   product_category_id: 9,
   name: "Beds",
   description: ""
+})
+
+# inserting membership types
+CommercePlatform.Repo.insert!(%MembershipType{
+  name: "NONE",
+  description: "User does not have a membership",
+  card_img: "non-member.jpg"
+})
+
+CommercePlatform.Repo.insert!(%MembershipType{
+  name: "PLATINUM",
+  description: "User has a 5% discount in all purchases",
+  card_img: "platinum.jpg"
+})
+
+CommercePlatform.Repo.insert!(%MembershipType{
+  name: "GOLDEN",
+  description: "User has a 10% discount in all purchases",
+  card_img: "golden.jpg"
 })

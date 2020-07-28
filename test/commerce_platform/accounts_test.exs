@@ -81,4 +81,67 @@ defmodule CommercePlatform.AccountsTest do
       assert %Ecto.Changeset{} = Accounts.change_user(user)
     end
   end
+
+  describe "membership_types" do
+    alias CommercePlatform.Accounts.MembershipType
+
+    @valid_attrs %{card_img: "some card_img", description: "some description", name: "some name"}
+    @update_attrs %{card_img: "some updated card_img", description: "some updated description", name: "some updated name"}
+    @invalid_attrs %{card_img: nil, description: nil, name: nil}
+
+    def membership_type_fixture(attrs \\ %{}) do
+      {:ok, membership_type} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Accounts.create_membership_type()
+
+      membership_type
+    end
+
+    test "list_membership_types/0 returns all membership_types" do
+      membership_type = membership_type_fixture()
+      assert Accounts.list_membership_types() == [membership_type]
+    end
+
+    test "get_membership_type!/1 returns the membership_type with given id" do
+      membership_type = membership_type_fixture()
+      assert Accounts.get_membership_type!(membership_type.id) == membership_type
+    end
+
+    test "create_membership_type/1 with valid data creates a membership_type" do
+      assert {:ok, %MembershipType{} = membership_type} = Accounts.create_membership_type(@valid_attrs)
+      assert membership_type.card_img == "some card_img"
+      assert membership_type.description == "some description"
+      assert membership_type.name == "some name"
+    end
+
+    test "create_membership_type/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_membership_type(@invalid_attrs)
+    end
+
+    test "update_membership_type/2 with valid data updates the membership_type" do
+      membership_type = membership_type_fixture()
+      assert {:ok, %MembershipType{} = membership_type} = Accounts.update_membership_type(membership_type, @update_attrs)
+      assert membership_type.card_img == "some updated card_img"
+      assert membership_type.description == "some updated description"
+      assert membership_type.name == "some updated name"
+    end
+
+    test "update_membership_type/2 with invalid data returns error changeset" do
+      membership_type = membership_type_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_membership_type(membership_type, @invalid_attrs)
+      assert membership_type == Accounts.get_membership_type!(membership_type.id)
+    end
+
+    test "delete_membership_type/1 deletes the membership_type" do
+      membership_type = membership_type_fixture()
+      assert {:ok, %MembershipType{}} = Accounts.delete_membership_type(membership_type)
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_membership_type!(membership_type.id) end
+    end
+
+    test "change_membership_type/1 returns a membership_type changeset" do
+      membership_type = membership_type_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_membership_type(membership_type)
+    end
+  end
 end
