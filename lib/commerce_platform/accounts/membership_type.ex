@@ -5,7 +5,7 @@ defmodule CommercePlatform.Accounts.MembershipType do
   schema "membership_types" do
     field :card_img, :string
     field :description, :string
-    field :name, :string, default: "normal"
+    field :name, :string
 
     timestamps()
   end
