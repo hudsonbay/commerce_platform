@@ -197,4 +197,100 @@ defmodule CommercePlatform.Stock do
   def change_product_category(%ProductCategory{} = product_category, attrs \\ %{}) do
     ProductCategory.changeset(product_category, attrs)
   end
+
+  alias CommercePlatform.Stock.ProductSubcategory
+
+  @doc """
+  Returns the list of product_subcategories.
+
+  ## Examples
+
+      iex> list_product_subcategories()
+      [%ProductSubcategory{}, ...]
+
+  """
+  def list_product_subcategories do
+    Repo.all(ProductSubcategory)
+  end
+
+  @doc """
+  Gets a single product_subcategory.
+
+  Raises `Ecto.NoResultsError` if the Product subcategory does not exist.
+
+  ## Examples
+
+      iex> get_product_subcategory!(123)
+      %ProductSubcategory{}
+
+      iex> get_product_subcategory!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_product_subcategory!(id), do: Repo.get!(ProductSubcategory, id)
+
+  @doc """
+  Creates a product_subcategory.
+
+  ## Examples
+
+      iex> create_product_subcategory(%{field: value})
+      {:ok, %ProductSubcategory{}}
+
+      iex> create_product_subcategory(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_product_subcategory(attrs \\ %{}) do
+    %ProductSubcategory{}
+    |> ProductSubcategory.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a product_subcategory.
+
+  ## Examples
+
+      iex> update_product_subcategory(product_subcategory, %{field: new_value})
+      {:ok, %ProductSubcategory{}}
+
+      iex> update_product_subcategory(product_subcategory, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_product_subcategory(%ProductSubcategory{} = product_subcategory, attrs) do
+    product_subcategory
+    |> ProductSubcategory.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a product_subcategory.
+
+  ## Examples
+
+      iex> delete_product_subcategory(product_subcategory)
+      {:ok, %ProductSubcategory{}}
+
+      iex> delete_product_subcategory(product_subcategory)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_product_subcategory(%ProductSubcategory{} = product_subcategory) do
+    Repo.delete(product_subcategory)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking product_subcategory changes.
+
+  ## Examples
+
+      iex> change_product_subcategory(product_subcategory)
+      %Ecto.Changeset{data: %ProductSubcategory{}}
+
+  """
+  def change_product_subcategory(%ProductSubcategory{} = product_subcategory, attrs \\ %{}) do
+    ProductSubcategory.changeset(product_subcategory, attrs)
+  end
 end

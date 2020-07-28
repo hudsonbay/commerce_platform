@@ -8,6 +8,5 @@ defmodule CommercePlatform.Repo.Migrations.CreateProductCategories do
 
       timestamps()
     end
-
   end
 end

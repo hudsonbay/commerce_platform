@@ -6,8 +6,18 @@ defmodule CommercePlatform.OrdersTest do
   describe "orders" do
     alias CommercePlatform.Orders.Order
 
-    @valid_attrs %{date_issued: "2010-04-17T14:00:00Z", number: "some number", paid: true, required_date: "2010-04-17T14:00:00Z"}
-    @update_attrs %{date_issued: "2011-05-18T15:01:01Z", number: "some updated number", paid: false, required_date: "2011-05-18T15:01:01Z"}
+    @valid_attrs %{
+      date_issued: "2010-04-17T14:00:00Z",
+      number: "some number",
+      paid: true,
+      required_date: "2010-04-17T14:00:00Z"
+    }
+    @update_attrs %{
+      date_issued: "2011-05-18T15:01:01Z",
+      number: "some updated number",
+      paid: false,
+      required_date: "2011-05-18T15:01:01Z"
+    }
     @invalid_attrs %{date_issued: nil, number: nil, paid: nil, required_date: nil}
 
     def order_fixture(attrs \\ %{}) do
@@ -71,9 +81,30 @@ defmodule CommercePlatform.OrdersTest do
   describe "shippers" do
     alias CommercePlatform.Orders.Shipper
 
-    @valid_attrs %{company_name: "some company_name", description: "some description", email: "some email", phone: "some phone", picture: "some picture", website: "some website"}
-    @update_attrs %{company_name: "some updated company_name", description: "some updated description", email: "some updated email", phone: "some updated phone", picture: "some updated picture", website: "some updated website"}
-    @invalid_attrs %{company_name: nil, description: nil, email: nil, phone: nil, picture: nil, website: nil}
+    @valid_attrs %{
+      company_name: "some company_name",
+      description: "some description",
+      email: "some email",
+      phone: "some phone",
+      picture: "some picture",
+      website: "some website"
+    }
+    @update_attrs %{
+      company_name: "some updated company_name",
+      description: "some updated description",
+      email: "some updated email",
+      phone: "some updated phone",
+      picture: "some updated picture",
+      website: "some updated website"
+    }
+    @invalid_attrs %{
+      company_name: nil,
+      description: nil,
+      email: nil,
+      phone: nil,
+      picture: nil,
+      website: nil
+    }
 
     def shipper_fixture(attrs \\ %{}) do
       {:ok, shipper} =
@@ -176,7 +207,10 @@ defmodule CommercePlatform.OrdersTest do
 
     test "update_order_detail/2 with valid data updates the order_detail" do
       order_detail = order_detail_fixture()
-      assert {:ok, %OrderDetail{} = order_detail} = Orders.update_order_detail(order_detail, @update_attrs)
+
+      assert {:ok, %OrderDetail{} = order_detail} =
+               Orders.update_order_detail(order_detail, @update_attrs)
+
       assert order_detail.discount == 456.7
       assert order_detail.price == 456.7
       assert order_detail.quantity == 43
@@ -184,7 +218,10 @@ defmodule CommercePlatform.OrdersTest do
 
     test "update_order_detail/2 with invalid data returns error changeset" do
       order_detail = order_detail_fixture()
-      assert {:error, %Ecto.Changeset{}} = Orders.update_order_detail(order_detail, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Orders.update_order_detail(order_detail, @invalid_attrs)
+
       assert order_detail == Orders.get_order_detail!(order_detail.id)
     end
 

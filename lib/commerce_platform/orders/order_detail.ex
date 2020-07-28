@@ -9,8 +9,6 @@ defmodule CommercePlatform.Orders.OrderDetail do
     field :discount, :float
     field :price, :float
     field :quantity, :integer
-    # field :order_id, :id
-    # field :product_id, :id
     belongs_to(:product, Product)
     belongs_to(:order, Order)
 

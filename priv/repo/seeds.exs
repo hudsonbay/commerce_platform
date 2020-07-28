@@ -12,6 +12,8 @@
 
 alias CommercePlatform.Measurements.MeasurementType
 alias CommercePlatform.Measurements.MeasurementUnit
+alias CommercePlatform.Stock.ProductCategory
+alias CommercePlatform.Stock.ProductSubcategory
 
 # inserting measurement types
 CommercePlatform.Repo.insert!(%MeasurementType{type: "Length"})
@@ -48,3 +50,217 @@ CommercePlatform.Repo.insert!(%MeasurementUnit{type_id: 4, unit_name: "lb"})
 CommercePlatform.Repo.insert!(%MeasurementUnit{type_id: 4, unit_name: "kg"})
 CommercePlatform.Repo.insert!(%MeasurementUnit{type_id: 4, unit_name: "q"})
 CommercePlatform.Repo.insert!(%MeasurementUnit{type_id: 4, unit_name: "t"})
+
+# inserting product categories
+CommercePlatform.Repo.insert!(%ProductCategory{
+  name: "Food",
+  description: "Food related products"
+})
+
+CommercePlatform.Repo.insert!(%ProductCategory{
+  name: "Transportation",
+  description: "All related to transportation"
+})
+
+CommercePlatform.Repo.insert!(%ProductCategory{
+  name: "Computers",
+  description: "All related to computers"
+})
+
+CommercePlatform.Repo.insert!(%ProductCategory{
+  name: "Services",
+  description: "All related to services"
+})
+
+CommercePlatform.Repo.insert!(%ProductCategory{
+  name: "Laptops",
+  description: "All related to laptops"
+})
+
+CommercePlatform.Repo.insert!(%ProductCategory{
+  name: "Electronics",
+  description: "All related to electronics"
+})
+
+CommercePlatform.Repo.insert!(%ProductCategory{
+  name: "Gaming consoles",
+  description: "All related to gaming consoles"
+})
+
+CommercePlatform.Repo.insert!(%ProductCategory{
+  name: "Music",
+  description: "All related to music"
+})
+
+CommercePlatform.Repo.insert!(%ProductCategory{
+  name: "Health",
+  description: "All related to health"
+})
+
+CommercePlatform.Repo.insert!(%ProductCategory{
+  name: "Home",
+  description: "All related to home appliances"
+})
+
+# inserting product subcategories
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 1,
+  name: "Frozen",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 1,
+  name: "Vegetables",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 1,
+  name: "Meats",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 2,
+  name: "Cars",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 2,
+  name: "Bikes",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 3,
+  name: "Parts",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 3,
+  name: "Monitors",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 3,
+  name: "Video cards",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 3,
+  name: "Motherboards",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 4,
+  name: "Gym trainers",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 4,
+  name: "Courses",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 4,
+  name: "Style",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 5,
+  name: "Laptops",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 5,
+  name: "Components",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 6,
+  name: "Transistors",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 6,
+  name: "Valves",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 6,
+  name: "Tools",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 7,
+  name: "Gaming consoles",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 7,
+  name: "Accesories",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 8,
+  name: "Wind instruments",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 8,
+  name: "Pianos",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 8,
+  name: "Guitars",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 8,
+  name: "Accesories",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 9,
+  name: "Pills",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 8,
+  name: "Syrups",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 9,
+  name: "Kitchen",
+  description: ""
+})
+
+CommercePlatform.Repo.insert!(%ProductSubcategory{
+  product_category_id: 9,
+  name: "Beds",
+  description: ""
+})

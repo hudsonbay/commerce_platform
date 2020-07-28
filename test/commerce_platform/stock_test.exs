@@ -125,7 +125,9 @@ defmodule CommercePlatform.StockTest do
     end
 
     test "create_product_category/1 with valid data creates a product_category" do
-      assert {:ok, %ProductCategory{} = product_category} = Stock.create_product_category(@valid_attrs)
+      assert {:ok, %ProductCategory{} = product_category} =
+               Stock.create_product_category(@valid_attrs)
+
       assert product_category.description == "some description"
       assert product_category.name == "some name"
     end
@@ -136,14 +138,20 @@ defmodule CommercePlatform.StockTest do
 
     test "update_product_category/2 with valid data updates the product_category" do
       product_category = product_category_fixture()
-      assert {:ok, %ProductCategory{} = product_category} = Stock.update_product_category(product_category, @update_attrs)
+
+      assert {:ok, %ProductCategory{} = product_category} =
+               Stock.update_product_category(product_category, @update_attrs)
+
       assert product_category.description == "some updated description"
       assert product_category.name == "some updated name"
     end
 
     test "update_product_category/2 with invalid data returns error changeset" do
       product_category = product_category_fixture()
-      assert {:error, %Ecto.Changeset{}} = Stock.update_product_category(product_category, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Stock.update_product_category(product_category, @invalid_attrs)
+
       assert product_category == Stock.get_product_category!(product_category.id)
     end
 
@@ -156,6 +164,78 @@ defmodule CommercePlatform.StockTest do
     test "change_product_category/1 returns a product_category changeset" do
       product_category = product_category_fixture()
       assert %Ecto.Changeset{} = Stock.change_product_category(product_category)
+    end
+  end
+
+  describe "product_subcategories" do
+    alias CommercePlatform.Stock.ProductSubcategory
+
+    @valid_attrs %{description: "some description", name: "some name"}
+    @update_attrs %{description: "some updated description", name: "some updated name"}
+    @invalid_attrs %{description: nil, name: nil}
+
+    def product_subcategory_fixture(attrs \\ %{}) do
+      {:ok, product_subcategory} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Stock.create_product_subcategory()
+
+      product_subcategory
+    end
+
+    test "list_product_subcategories/0 returns all product_subcategories" do
+      product_subcategory = product_subcategory_fixture()
+      assert Stock.list_product_subcategories() == [product_subcategory]
+    end
+
+    test "get_product_subcategory!/1 returns the product_subcategory with given id" do
+      product_subcategory = product_subcategory_fixture()
+      assert Stock.get_product_subcategory!(product_subcategory.id) == product_subcategory
+    end
+
+    test "create_product_subcategory/1 with valid data creates a product_subcategory" do
+      assert {:ok, %ProductSubcategory{} = product_subcategory} =
+               Stock.create_product_subcategory(@valid_attrs)
+
+      assert product_subcategory.description == "some description"
+      assert product_subcategory.name == "some name"
+    end
+
+    test "create_product_subcategory/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Stock.create_product_subcategory(@invalid_attrs)
+    end
+
+    test "update_product_subcategory/2 with valid data updates the product_subcategory" do
+      product_subcategory = product_subcategory_fixture()
+
+      assert {:ok, %ProductSubcategory{} = product_subcategory} =
+               Stock.update_product_subcategory(product_subcategory, @update_attrs)
+
+      assert product_subcategory.description == "some updated description"
+      assert product_subcategory.name == "some updated name"
+    end
+
+    test "update_product_subcategory/2 with invalid data returns error changeset" do
+      product_subcategory = product_subcategory_fixture()
+
+      assert {:error, %Ecto.Changeset{}} =
+               Stock.update_product_subcategory(product_subcategory, @invalid_attrs)
+
+      assert product_subcategory == Stock.get_product_subcategory!(product_subcategory.id)
+    end
+
+    test "delete_product_subcategory/1 deletes the product_subcategory" do
+      product_subcategory = product_subcategory_fixture()
+      assert {:ok, %ProductSubcategory{}} = Stock.delete_product_subcategory(product_subcategory)
+
+      assert_raise Ecto.NoResultsError, fn ->
+        Stock.get_product_subcategory!(product_subcategory.id)
+      end
+    end
+
+    test "change_product_subcategory/1 returns a product_subcategory changeset" do
+      product_subcategory = product_subcategory_fixture()
+      assert %Ecto.Changeset{} = Stock.change_product_subcategory(product_subcategory)
     end
   end
 end
