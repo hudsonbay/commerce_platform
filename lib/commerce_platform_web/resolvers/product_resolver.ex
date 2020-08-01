@@ -16,6 +16,11 @@ defmodule CommercePlatformWeb.Resolvers.ProductResolver do
     {:ok, Stock.list_out_of_stock_products()}
   end
 
+  def running_out_products(_, _, %{context: context}) do
+    IO.inspect(context)
+    {:ok, Stock.list_running_out_products()}
+  end
+
   # TODO: Fix case product not found
   def get_product_by_id(%{id: id}, _info) do
     case Stock.get_product!(id) do

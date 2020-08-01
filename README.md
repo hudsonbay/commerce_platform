@@ -17,6 +17,7 @@ A GraphQL API of an e-commerce platform
   * List all products (Admins)
   * List available products, according to the number of products on inventory
   * List out of stock products (Admins)
+  * List products that are about to run out, so Admins can insert more on the inventory (Admins)
 
 ## Some notes:
   * Some dummy data will be inserted into the database for you to try things quickly. I did this for you ;)

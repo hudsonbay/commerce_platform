@@ -38,6 +38,15 @@ defmodule CommercePlatform.Stock do
   end
 
   @doc """
+  Returns the list of products that are about to run out based on the condition that there are less than 3 products on the inventory.
+  This query doesn't include products that already run out
+  """
+  def list_running_out_products do
+    from(p in Product, where: p.stock <= 3 and p.stock > 0)
+    |> Repo.all()
+  end
+
+  @doc """
   Gets a single product.
 
   Raises `Ecto.NoResultsError` if the Product does not exist.

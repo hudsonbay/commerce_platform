@@ -38,7 +38,11 @@ defmodule CommercePlatformWeb.Schema do
       resolve(&Resolvers.ProductResolver.out_of_stock_products/3)
     end
 
-    # TODO get_productos_agotados, get_products_a_punto_de_agotarse
+    @desc "Get a list of the products that are about to run out"
+    field :running_out_products, list_of(:product_type) do
+      middleware(Middleware.Authorize, "admin")
+      resolve(&Resolvers.ProductResolver.running_out_products/3)
+    end
 
     @desc "Get a product by id"
     field :get_product_by_id, type: :product_type do
