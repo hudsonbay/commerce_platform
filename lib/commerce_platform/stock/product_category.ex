@@ -2,13 +2,13 @@ defmodule CommercePlatform.Stock.ProductCategory do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias CommercePlatform.Stock.Product
+  alias CommercePlatform.Stock.ProductSubcategory
 
   schema "product_categories" do
     field :description, :string
     field :name, :string
 
-    has_many :products, Product
+    has_many :product_subcategories, ProductSubcategory
 
     timestamps()
   end

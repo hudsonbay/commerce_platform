@@ -50,12 +50,6 @@ defmodule CommercePlatformWeb.Schema do
       resolve(&Resolvers.ProductResolver.get_product_by_id/2)
     end
 
-    # @desc "Get a single product"
-    # field :get_product_by_name, type: :product_type do
-    #   arg(:name, non_null(:name))
-    #   resolve(&Resolvers.ProductResolver.get_product_by_name/2)
-    # end
-
     @desc "Get a list of all product categories"
     field :product_categories, list_of(:product_category_type) do
       resolve(&Resolvers.ProductCategoryResolver.product_categories/3)
