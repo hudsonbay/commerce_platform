@@ -3,7 +3,7 @@ defmodule CommercePlatform.Repo.Migrations.AddCategoryFieldToProduct do
 
   def change do
     alter table(:products) do
-      add :product_category_id, references(:product_categories, on_delete: :delete_all)
+      add :product_subcategory_id, references(:product_subcategories, on_delete: :delete_all)
     end
   end
 end

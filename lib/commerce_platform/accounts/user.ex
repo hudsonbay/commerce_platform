@@ -36,6 +36,10 @@ defmodule CommercePlatform.Accounts.User do
     timestamps()
   end
 
+  @spec changeset(
+          {map, map} | %{:__struct__ => atom | %{__changeset__: map}, optional(atom) => any},
+          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
+        ) :: Ecto.Changeset.t()
   @doc false
   def changeset(user, attrs) do
     user
@@ -46,6 +50,7 @@ defmodule CommercePlatform.Accounts.User do
       :password,
       :password_confirmation,
       :role,
+      :membership_type_id,
       :shipping_address,
       :shipping_city,
       :shipping_region,
@@ -64,6 +69,7 @@ defmodule CommercePlatform.Accounts.User do
       :password,
       :password_confirmation,
       :role
+      # :membership_type_id
     ])
     |> validate_format(:email, ~r/@/)
     |> update_change(:email, &String.downcase(&1))

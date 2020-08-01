@@ -15,6 +15,8 @@ defmodule CommercePlatform.Orders.Order do
 
     # TODO add state, default:unpaid
     # TODO add priority, default:normal
+    # TODO Fix user relation
+    # TODO add order_status
     timestamps(type: :utc_datetime)
   end
 

@@ -2,7 +2,7 @@ defmodule CommercePlatform.Stock.Product do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias CommercePlatform.Stock.ProductCategory
+  alias CommercePlatform.Stock.ProductSubcategory
 
   schema "products" do
     field :name, :string
@@ -13,7 +13,7 @@ defmodule CommercePlatform.Stock.Product do
     field :weight, :float
     field :image, :string
     field :thumbnail, :string
-    belongs_to :product_category, ProductCategory
+    belongs_to :product_subcategory, ProductSubcategory
     # TODO: add unidad_de_medida
     timestamps()
   end
@@ -30,7 +30,7 @@ defmodule CommercePlatform.Stock.Product do
       :description,
       :thumbnail,
       :image,
-      :product_category_id
+      :product_subcategory_id
     ])
     |> validate_required([
       :name,
@@ -41,8 +41,8 @@ defmodule CommercePlatform.Stock.Product do
       :description,
       :thumbnail,
       :image,
-      :product_category_id
+      :product_subcategory_id
     ])
-    |> foreign_key_constraint(:product_category)
+    |> foreign_key_constraint(:product_subcategory)
   end
 end

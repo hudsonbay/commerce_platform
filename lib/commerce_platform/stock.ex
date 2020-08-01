@@ -9,7 +9,7 @@ defmodule CommercePlatform.Stock do
   alias CommercePlatform.Stock.Product
 
   @doc """
-  Returns the list of products.
+  Returns the list of all products.
 
   ## Examples
 
@@ -19,6 +19,31 @@ defmodule CommercePlatform.Stock do
   """
   def list_products do
     Repo.all(Product)
+  end
+
+  @doc """
+  Returns the list of the available products
+  """
+  def list_available_products do
+    from(p in Product, where: p.stock > 0)
+    |> Repo.all()
+  end
+
+  @doc """
+  Returns the list of the out of stock products
+  """
+  def list_out_of_stock_products do
+    from(p in Product, where: p.stock == 0)
+    |> Repo.all()
+  end
+
+  @doc """
+  Returns the list of products that are about to run out based on the condition that there are less than 3 products on the inventory.
+  This query doesn't include products that already run out
+  """
+  def list_running_out_products do
+    from(p in Product, where: p.stock <= 3 and p.stock > 0)
+    |> Repo.all()
   end
 
   @doc """
