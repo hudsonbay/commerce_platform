@@ -14,10 +14,10 @@ defmodule CommercePlatformWeb.Schema do
       resolve(&Resolvers.UserResolver.users/3)
     end
 
-    @desc "Get a single user"
-    field :find_user, type: :user_type do
+    @desc "Get a user by id"
+    field :get_user_by_id, type: :user_type do
       arg(:id, non_null(:id))
-      resolve(&Resolvers.UserResolver.find_user/2)
+      resolve(&Resolvers.UserResolver.get_user_by_id/2)
     end
 
     # Products
@@ -26,6 +26,20 @@ defmodule CommercePlatformWeb.Schema do
       # middleware(Middleware.Authorize, :any)
       resolve(&Resolvers.ProductResolver.products/3)
     end
+
+    # TODO get_available_products, get_productos_agotados, get_products_a_punto_de_agotarse
+
+    @desc "Get a product by id"
+    field :get_product_by_id, type: :product_type do
+      arg(:id, non_null(:id))
+      resolve(&Resolvers.ProductResolver.get_product_by_id/2)
+    end
+
+    # @desc "Get a single product"
+    # field :get_product_by_name, type: :product_type do
+    #   arg(:name, non_null(:name))
+    #   resolve(&Resolvers.ProductResolver.get_product_by_name/2)
+    # end
 
     @desc "Get a list of all product categories"
     field :product_categories, list_of(:product_category_type) do
