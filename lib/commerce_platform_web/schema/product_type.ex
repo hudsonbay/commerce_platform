@@ -12,7 +12,8 @@ defmodule CommercePlatformWeb.Schema.Types.ProductType do
     field(:weight, :float)
     field(:image, :string)
     field(:thumbnail, :string)
-    field(:product_category, :product_category_type, resolve: assoc(:product_category))
+
+    field(:product_subcategory, :product_subcategory_type, resolve: assoc(:product_subcategory))
   end
 
   input_object :product_input_type do
@@ -24,6 +25,6 @@ defmodule CommercePlatformWeb.Schema.Types.ProductType do
     field(:weight, non_null(:float))
     field(:image, non_null(:string))
     field(:thumbnail, non_null(:string))
-    field(:product_category_id, non_null(:id))
+    field(:product_subcategory_id, non_null(:integer))
   end
 end

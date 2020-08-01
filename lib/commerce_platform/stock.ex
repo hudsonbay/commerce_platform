@@ -9,7 +9,7 @@ defmodule CommercePlatform.Stock do
   alias CommercePlatform.Stock.Product
 
   @doc """
-  Returns the list of products.
+  Returns the list of all products.
 
   ## Examples
 
@@ -19,6 +19,14 @@ defmodule CommercePlatform.Stock do
   """
   def list_products do
     Repo.all(Product)
+  end
+
+  @doc """
+  Returns the list of the available products
+  """
+  def list_available_products do
+    from(p in Product, where: p.stock > 0)
+    |> Repo.all()
   end
 
   @doc """

@@ -64,8 +64,8 @@ defmodule CommercePlatform.Accounts.User do
       :email,
       :password,
       :password_confirmation,
-      :role,
-      :membership_type_id
+      :role
+      # :membership_type_id
     ])
     |> validate_format(:email, ~r/@/)
     |> update_change(:email, &String.downcase(&1))

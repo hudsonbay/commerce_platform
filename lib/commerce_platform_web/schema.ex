@@ -22,9 +22,14 @@ defmodule CommercePlatformWeb.Schema do
 
     # Products
     @desc "Get a list of all products"
-    field :products, list_of(:product_type) do
-      # middleware(Middleware.Authorize, :any)
-      resolve(&Resolvers.ProductResolver.products/3)
+    field :all_products, list_of(:product_type) do
+      middleware(Middleware.Authorize, "admin")
+      resolve(&Resolvers.ProductResolver.all_products/3)
+    end
+
+    @desc "Get a list of all available products (in stock)"
+    field :available_products, list_of(:product_type) do
+      resolve(&Resolvers.ProductResolver.available_products/3)
     end
 
     # TODO get_available_products, get_productos_agotados, get_products_a_punto_de_agotarse

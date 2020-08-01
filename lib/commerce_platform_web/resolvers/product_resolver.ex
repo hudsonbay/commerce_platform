@@ -1,9 +1,14 @@
 defmodule CommercePlatformWeb.Resolvers.ProductResolver do
   alias CommercePlatform.Stock
 
-  def products(_, _, %{context: context}) do
+  def all_products(_, _, %{context: context}) do
     IO.inspect(context)
     {:ok, Stock.list_products()}
+  end
+
+  def available_products(_, _, %{context: context}) do
+    IO.inspect(context)
+    {:ok, Stock.list_available_products()}
   end
 
   # TODO: Fix case product not found
