@@ -14,7 +14,9 @@ A GraphQL API of an e-commerce platform
   * CRUDS to these entities:
     * Products
     * Product categories
-  * Products must have a stock field, if a product is not on the stock it won't be showed/offered to the user
+  * List all products (Admins)
+  * List available products, according to the number of products on inventory
+  * List out of stock products (Admins)
 
 ## Some notes:
   * Some dummy data will be inserted into the database for you to try things quickly. I did this for you ;)

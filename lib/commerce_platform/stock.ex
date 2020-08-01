@@ -30,6 +30,14 @@ defmodule CommercePlatform.Stock do
   end
 
   @doc """
+  Returns the list of the out of stock products
+  """
+  def list_out_of_stock_products do
+    from(p in Product, where: p.stock == 0)
+    |> Repo.all()
+  end
+
+  @doc """
   Gets a single product.
 
   Raises `Ecto.NoResultsError` if the Product does not exist.
