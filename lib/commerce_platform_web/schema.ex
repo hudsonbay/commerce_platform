@@ -7,7 +7,7 @@ defmodule CommercePlatformWeb.Schema do
   import_types(CommercePlatformWeb.Schema.Types)
 
   query do
-    # Users
+    # Users queries
     @desc "Get a list of all users"
     field :users, list_of(:user_type) do
       middleware(Middleware.Authorize, "admin")
@@ -20,7 +20,7 @@ defmodule CommercePlatformWeb.Schema do
       resolve(&Resolvers.UserResolver.get_user_by_id/2)
     end
 
-    # Products
+    # Products queries
     @desc "Get a list of all products"
     field :all_products, list_of(:product_type) do
       middleware(Middleware.Authorize, "admin")
@@ -61,7 +61,7 @@ defmodule CommercePlatformWeb.Schema do
       resolve(&Resolvers.ProductCategoryResolver.product_categories/3)
     end
 
-    # Orders
+    # Orders queries
     @desc "Get a list of all orders"
     field :all_orders, list_of(:order_type) do
       middleware(Middleware.Authorize, "admin")
@@ -70,6 +70,7 @@ defmodule CommercePlatformWeb.Schema do
   end
 
   mutation do
+    # Users mutations
     @desc "Register a new user"
     field :register_user, type: :user_type do
       arg(:input, non_null(:user_input_type))
@@ -82,6 +83,7 @@ defmodule CommercePlatformWeb.Schema do
       resolve(&Resolvers.SessionResolver.login_user/3)
     end
 
+    # Products mutations
     @desc "Insert new product"
     field :insert_product, type: :product_type do
       arg(:input, non_null(:product_input_type))
@@ -96,6 +98,7 @@ defmodule CommercePlatformWeb.Schema do
       resolve(&Resolvers.ProductCategoryResolver.insert_product_category/3)
     end
 
+    # Orders mutations
     @desc "insert new order"
     field :insert_order, type: :order_type do
       arg(:input, non_null(:order_input_type))
