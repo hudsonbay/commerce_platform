@@ -25,6 +25,8 @@ If you want to see the databse schema you will be able to see it in this picture
 
 
 ## Installation
+For generating PDFs on Unix-based environments, ``` wkhtmltopdf ``` package must be installed.
+
 To start your Phoenix server:
 
   * Setup the project with `mix setup`

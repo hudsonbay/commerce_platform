@@ -46,6 +46,7 @@ defmodule CommercePlatform.Accounts.User do
       :password,
       :password_confirmation,
       :role,
+      :membership_type_id,
       :shipping_address,
       :shipping_city,
       :shipping_region,
@@ -63,7 +64,8 @@ defmodule CommercePlatform.Accounts.User do
       :email,
       :password,
       :password_confirmation,
-      :role
+      :role,
+      :membership_type_id
     ])
     |> validate_format(:email, ~r/@/)
     |> update_change(:email, &String.downcase(&1))
