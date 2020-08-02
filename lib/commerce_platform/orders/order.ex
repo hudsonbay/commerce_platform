@@ -4,6 +4,7 @@ defmodule CommercePlatform.Orders.Order do
 
   alias CommercePlatform.Accounts.User
   alias CommercePlatform.Orders.Shipper
+  alias CommercePlatform.Orders.OrderDetail
 
   schema "orders" do
     field :date_issued, :utc_datetime
@@ -12,6 +13,7 @@ defmodule CommercePlatform.Orders.Order do
     field :delivery_date, :utc_datetime
     belongs_to(:user, User)
     belongs_to(:shipper, Shipper)
+    has_many :order_details, OrderDetail
 
     # TODO add state, default:unpaid
     # TODO add priority, default:normal
