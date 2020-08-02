@@ -20,7 +20,7 @@ defmodule CommercePlatform.MixProject do
   def application do
     [
       mod: {CommercePlatform.Application, []},
-      extra_applications: [:logger, :runtime_tools, :timex]
+      extra_applications: [:logger, :runtime_tools, :timex, :absinthe_plug]
     ]
   end
 
