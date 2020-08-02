@@ -3,6 +3,7 @@ defmodule CommercePlatform.Orders.Shipper do
   import Ecto.Changeset
 
   alias CommercePlatform.World.Country
+  alias CommercePlatform.Orders.Order
 
   schema "shippers" do
     field :company_name, :string
@@ -12,6 +13,7 @@ defmodule CommercePlatform.Orders.Shipper do
     field :picture, :string
     field :website, :string
     belongs_to(:country, Country)
+    has_many :orders, Order
 
     timestamps()
   end
