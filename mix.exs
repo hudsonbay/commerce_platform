@@ -56,7 +56,8 @@ defmodule CommercePlatform.MixProject do
       {:timex, "~> 3.5"},
       {:pdf_generator, "~> 0.6.2"},
       {:sneeze, "~> 1.1"},
-      {:mailgun, "~> 0.1.2"}
+      {:mailgun, "~> 0.1.2"},
+      {:bodyguard, "~> 2.4"}
     ]
   end
 
