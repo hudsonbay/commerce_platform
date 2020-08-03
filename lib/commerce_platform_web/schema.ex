@@ -29,6 +29,7 @@ defmodule CommercePlatformWeb.Schema do
 
     @desc "Get a list of all available products (in stock)"
     field :available_products, list_of(:product_type) do
+      arg(:matching, :string)
       resolve(&Resolvers.ProductResolver.available_products/3)
     end
 
@@ -49,12 +50,6 @@ defmodule CommercePlatformWeb.Schema do
       arg(:id, non_null(:id))
       resolve(&Resolvers.ProductResolver.get_product_by_id/2)
     end
-
-    # @desc "Get a single product"
-    # field :get_product_by_name, type: :product_type do
-    #   arg(:name, non_null(:name))
-    #   resolve(&Resolvers.ProductResolver.get_product_by_name/2)
-    # end
 
     @desc "Get a list of all product categories"
     field :product_categories, list_of(:product_category_type) do
@@ -102,7 +97,7 @@ defmodule CommercePlatformWeb.Schema do
     @desc "insert new order"
     field :insert_order, type: :order_type do
       arg(:input, non_null(:order_input_type))
-      middleware(Middleware.Authorize, :any)
+      # middleware(Middleware.Authorize, :any)
       resolve(&Resolvers.OrderResolver.insert_order/3)
     end
   end

@@ -1,5 +1,6 @@
 defmodule CommercePlatformWeb.Resolvers.ProductResolver do
-  alias CommercePlatform.Stock
+  alias CommercePlatform.{Stock, Repo}
+  import Ecto.Query
 
   def all_products(_, _, %{context: context}) do
     IO.inspect(context)
@@ -9,6 +10,13 @@ defmodule CommercePlatformWeb.Resolvers.ProductResolver do
   def available_products(_, _, %{context: context}) do
     IO.inspect(context)
     {:ok, Stock.list_available_products()}
+  end
+
+  # TODO fix function available_products when it has to match a product name because it's not doing it
+  def available_products(_, %{matching: name}, %{context: context}) do
+    IO.inspect(context)
+    query = from p in Stock.Product, where: ilike(p.name, ^"%#{name}%")
+    {:ok, Repo.all(query)}
   end
 
   def out_of_stock_products(_, _, %{context: context}) do

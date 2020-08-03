@@ -15,6 +15,12 @@ defmodule CommercePlatformWeb.Router do
     plug CommercePlatformWeb.Plugs.Context
   end
 
+  pipeline :graphql do
+    plug :fetch_session
+    plug :fetch_flash
+    plug CommercePlatformWeb.Plugs.Context
+  end
+
   scope "/", CommercePlatformWeb do
     pipe_through :browser
 
@@ -22,7 +28,7 @@ defmodule CommercePlatformWeb.Router do
   end
 
   scope "/api/v1" do
-    pipe_through :api
+    pipe_through :graphql
 
     forward "/graphql", Absinthe.Plug, schema: CommercePlatformWeb.Schema
 

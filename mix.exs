@@ -20,7 +20,7 @@ defmodule CommercePlatform.MixProject do
   def application do
     [
       mod: {CommercePlatform.Application, []},
-      extra_applications: [:logger, :runtime_tools, :timex]
+      extra_applications: [:logger, :runtime_tools, :timex, :absinthe_plug]
     ]
   end
 
@@ -56,7 +56,8 @@ defmodule CommercePlatform.MixProject do
       {:timex, "~> 3.5"},
       {:pdf_generator, "~> 0.6.2"},
       {:sneeze, "~> 1.1"},
-      {:mailgun, "~> 0.1.2"}
+      {:mailgun, "~> 0.1.2"},
+      {:bodyguard, "~> 2.4"}
     ]
   end
 
