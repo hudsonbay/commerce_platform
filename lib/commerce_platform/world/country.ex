@@ -2,7 +2,7 @@ defmodule CommercePlatform.World.Country do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias CommercePlatform.World.State
+  alias CommercePlatform.World.{State, ZoneMember}
 
   schema "countries" do
     field :iso, :string
@@ -11,6 +11,10 @@ defmodule CommercePlatform.World.Country do
     field :name, :string
     field :num_code, :string
     field :has_states, :boolean, default: false
+
+    # Country can belong to many Zone via zone members
+    has_many :zone_members, {"country_zone_members", ZoneMember}, foreign_key: :zoneable_id
+    has_many :zones, through: [:zone_members, :zone]
 
     has_many :states, State
 

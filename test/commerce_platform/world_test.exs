@@ -340,4 +340,126 @@ defmodule CommercePlatform.WorldTest do
       assert %Ecto.Changeset{} = World.change_state(state)
     end
   end
+
+  describe "zones" do
+    alias CommercePlatform.World.Zone
+
+    @valid_attrs %{description: "some description", name: "some name", type: "some type"}
+    @update_attrs %{description: "some updated description", name: "some updated name", type: "some updated type"}
+    @invalid_attrs %{description: nil, name: nil, type: nil}
+
+    def zone_fixture(attrs \\ %{}) do
+      {:ok, zone} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> World.create_zone()
+
+      zone
+    end
+
+    test "list_zones/0 returns all zones" do
+      zone = zone_fixture()
+      assert World.list_zones() == [zone]
+    end
+
+    test "get_zone!/1 returns the zone with given id" do
+      zone = zone_fixture()
+      assert World.get_zone!(zone.id) == zone
+    end
+
+    test "create_zone/1 with valid data creates a zone" do
+      assert {:ok, %Zone{} = zone} = World.create_zone(@valid_attrs)
+      assert zone.description == "some description"
+      assert zone.name == "some name"
+      assert zone.type == "some type"
+    end
+
+    test "create_zone/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = World.create_zone(@invalid_attrs)
+    end
+
+    test "update_zone/2 with valid data updates the zone" do
+      zone = zone_fixture()
+      assert {:ok, %Zone{} = zone} = World.update_zone(zone, @update_attrs)
+      assert zone.description == "some updated description"
+      assert zone.name == "some updated name"
+      assert zone.type == "some updated type"
+    end
+
+    test "update_zone/2 with invalid data returns error changeset" do
+      zone = zone_fixture()
+      assert {:error, %Ecto.Changeset{}} = World.update_zone(zone, @invalid_attrs)
+      assert zone == World.get_zone!(zone.id)
+    end
+
+    test "delete_zone/1 deletes the zone" do
+      zone = zone_fixture()
+      assert {:ok, %Zone{}} = World.delete_zone(zone)
+      assert_raise Ecto.NoResultsError, fn -> World.get_zone!(zone.id) end
+    end
+
+    test "change_zone/1 returns a zone changeset" do
+      zone = zone_fixture()
+      assert %Ecto.Changeset{} = World.change_zone(zone)
+    end
+  end
+
+  describe "zone_members" do
+    alias CommercePlatform.World.ZoneMember
+
+    @valid_attrs %{zoneable_id: 42}
+    @update_attrs %{zoneable_id: 43}
+    @invalid_attrs %{zoneable_id: nil}
+
+    def zone_member_fixture(attrs \\ %{}) do
+      {:ok, zone_member} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> World.create_zone_member()
+
+      zone_member
+    end
+
+    test "list_zone_members/0 returns all zone_members" do
+      zone_member = zone_member_fixture()
+      assert World.list_zone_members() == [zone_member]
+    end
+
+    test "get_zone_member!/1 returns the zone_member with given id" do
+      zone_member = zone_member_fixture()
+      assert World.get_zone_member!(zone_member.id) == zone_member
+    end
+
+    test "create_zone_member/1 with valid data creates a zone_member" do
+      assert {:ok, %ZoneMember{} = zone_member} = World.create_zone_member(@valid_attrs)
+      assert zone_member.zoneable_id == 42
+    end
+
+    test "create_zone_member/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = World.create_zone_member(@invalid_attrs)
+    end
+
+    test "update_zone_member/2 with valid data updates the zone_member" do
+      zone_member = zone_member_fixture()
+      assert {:ok, %ZoneMember{} = zone_member} = World.update_zone_member(zone_member, @update_attrs)
+      assert zone_member.zoneable_id == 43
+    end
+
+    test "update_zone_member/2 with invalid data returns error changeset" do
+      zone_member = zone_member_fixture()
+      assert {:error, %Ecto.Changeset{}} = World.update_zone_member(zone_member, @invalid_attrs)
+      assert zone_member == World.get_zone_member!(zone_member.id)
+    end
+
+    test "delete_zone_member/1 deletes the zone_member" do
+      zone_member = zone_member_fixture()
+      assert {:ok, %ZoneMember{}} = World.delete_zone_member(zone_member)
+      assert_raise Ecto.NoResultsError, fn -> World.get_zone_member!(zone_member.id) end
+    end
+
+    test "change_zone_member/1 returns a zone_member changeset" do
+      zone_member = zone_member_fixture()
+      assert %Ecto.Changeset{} = World.change_zone_member(zone_member)
+    end
+  end
 end

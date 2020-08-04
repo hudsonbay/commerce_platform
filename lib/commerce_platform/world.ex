@@ -197,4 +197,196 @@ defmodule CommercePlatform.World do
   def change_state(%State{} = state, attrs \\ %{}) do
     State.changeset(state, attrs)
   end
+
+  alias CommercePlatform.World.Zone
+
+  @doc """
+  Returns the list of zones.
+
+  ## Examples
+
+      iex> list_zones()
+      [%Zone{}, ...]
+
+  """
+  def list_zones do
+    Repo.all(Zone)
+  end
+
+  @doc """
+  Gets a single zone.
+
+  Raises `Ecto.NoResultsError` if the Zone does not exist.
+
+  ## Examples
+
+      iex> get_zone!(123)
+      %Zone{}
+
+      iex> get_zone!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_zone!(id), do: Repo.get!(Zone, id)
+
+  @doc """
+  Creates a zone.
+
+  ## Examples
+
+      iex> create_zone(%{field: value})
+      {:ok, %Zone{}}
+
+      iex> create_zone(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_zone(attrs \\ %{}) do
+    %Zone{}
+    |> Zone.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a zone.
+
+  ## Examples
+
+      iex> update_zone(zone, %{field: new_value})
+      {:ok, %Zone{}}
+
+      iex> update_zone(zone, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_zone(%Zone{} = zone, attrs) do
+    zone
+    |> Zone.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a zone.
+
+  ## Examples
+
+      iex> delete_zone(zone)
+      {:ok, %Zone{}}
+
+      iex> delete_zone(zone)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_zone(%Zone{} = zone) do
+    Repo.delete(zone)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking zone changes.
+
+  ## Examples
+
+      iex> change_zone(zone)
+      %Ecto.Changeset{data: %Zone{}}
+
+  """
+  def change_zone(%Zone{} = zone, attrs \\ %{}) do
+    Zone.changeset(zone, attrs)
+  end
+
+  alias CommercePlatform.World.ZoneMember
+
+  @doc """
+  Returns the list of zone_members.
+
+  ## Examples
+
+      iex> list_zone_members()
+      [%ZoneMember{}, ...]
+
+  """
+  def list_zone_members do
+    Repo.all(ZoneMember)
+  end
+
+  @doc """
+  Gets a single zone_member.
+
+  Raises `Ecto.NoResultsError` if the Zone member does not exist.
+
+  ## Examples
+
+      iex> get_zone_member!(123)
+      %ZoneMember{}
+
+      iex> get_zone_member!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_zone_member!(id), do: Repo.get!(ZoneMember, id)
+
+  @doc """
+  Creates a zone_member.
+
+  ## Examples
+
+      iex> create_zone_member(%{field: value})
+      {:ok, %ZoneMember{}}
+
+      iex> create_zone_member(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_zone_member(attrs \\ %{}) do
+    %ZoneMember{}
+    |> ZoneMember.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a zone_member.
+
+  ## Examples
+
+      iex> update_zone_member(zone_member, %{field: new_value})
+      {:ok, %ZoneMember{}}
+
+      iex> update_zone_member(zone_member, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_zone_member(%ZoneMember{} = zone_member, attrs) do
+    zone_member
+    |> ZoneMember.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a zone_member.
+
+  ## Examples
+
+      iex> delete_zone_member(zone_member)
+      {:ok, %ZoneMember{}}
+
+      iex> delete_zone_member(zone_member)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_zone_member(%ZoneMember{} = zone_member) do
+    Repo.delete(zone_member)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking zone_member changes.
+
+  ## Examples
+
+      iex> change_zone_member(zone_member)
+      %Ecto.Changeset{data: %ZoneMember{}}
+
+  """
+  def change_zone_member(%ZoneMember{} = zone_member, attrs \\ %{}) do
+    ZoneMember.changeset(zone_member, attrs)
+  end
 end
