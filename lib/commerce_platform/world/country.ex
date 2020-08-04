@@ -2,21 +2,12 @@ defmodule CommercePlatform.World.Country do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias CommercePlatform.World.{State, ZoneMember}
-
   schema "countries" do
     field :iso, :string
     field :iso3, :string
     field :iso_name, :string
     field :name, :string
     field :num_code, :string
-    field :has_states, :boolean, default: false
-
-    # Country can belong to many Zone via zone members
-    has_many :zone_members, {"country_zone_members", ZoneMember}, foreign_key: :zoneable_id
-    has_many :zones, through: [:zone_members, :zone]
-
-    has_many :states, State
 
     timestamps()
   end
@@ -24,8 +15,8 @@ defmodule CommercePlatform.World.Country do
   @doc false
   def changeset(country, attrs) do
     country
-    |> cast(attrs, [:name, :iso, :iso3, :iso_name, :num_code, :has_states])
-    |> validate_required([:name, :iso, :iso3, :iso_name, :has_states])
+    |> cast(attrs, [:name, :iso, :iso3, :iso_name, :num_code])
+    |> validate_required([:name, :iso, :iso3, :iso_name])
     |> validate_length(:iso, is: 2)
     |> validate_length(:iso3, is: 3)
     |> unique_constraint(:iso)
