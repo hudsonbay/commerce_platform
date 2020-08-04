@@ -1,7 +1,7 @@
 defmodule CommercePlatform.OrdersTest do
-  # use CommercePlatform.DataCase
+  use CommercePlatform.DataCase
 
-  # alias CommercePlatform.Orders
+  alias CommercePlatform.Orders
 
   # describe "orders" do
   #   alias CommercePlatform.Orders.Order
@@ -236,4 +236,68 @@ defmodule CommercePlatform.OrdersTest do
   #     assert %Ecto.Changeset{} = Orders.change_order_detail(order_detail)
   #   end
   # end
+
+  describe "order_state" do
+    alias CommercePlatform.Orders.OrderState
+
+    @valid_attrs %{description: "some description", name: "some name"}
+    @update_attrs %{description: "some updated description", name: "some updated name"}
+    @invalid_attrs %{description: nil, name: nil}
+
+    def order_state_fixture(attrs \\ %{}) do
+      {:ok, order_state} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Orders.create_order_state()
+
+      order_state
+    end
+
+    test "list_order_state/0 returns all order_state" do
+      order_state = order_state_fixture()
+      assert Orders.list_order_state() == [order_state]
+    end
+
+    test "get_order_state!/1 returns the order_state with given id" do
+      order_state = order_state_fixture()
+      assert Orders.get_order_state!(order_state.id) == order_state
+    end
+
+    test "create_order_state/1 with valid data creates a order_state" do
+      assert {:ok, %OrderState{} = order_state} = Orders.create_order_state(@valid_attrs)
+      assert order_state.description == "some description"
+      assert order_state.name == "some name"
+    end
+
+    test "create_order_state/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Orders.create_order_state(@invalid_attrs)
+    end
+
+    test "update_order_state/2 with valid data updates the order_state" do
+      order_state = order_state_fixture()
+
+      assert {:ok, %OrderState{} = order_state} =
+               Orders.update_order_state(order_state, @update_attrs)
+
+      assert order_state.description == "some updated description"
+      assert order_state.name == "some updated name"
+    end
+
+    test "update_order_state/2 with invalid data returns error changeset" do
+      order_state = order_state_fixture()
+      assert {:error, %Ecto.Changeset{}} = Orders.update_order_state(order_state, @invalid_attrs)
+      assert order_state == Orders.get_order_state!(order_state.id)
+    end
+
+    test "delete_order_state/1 deletes the order_state" do
+      order_state = order_state_fixture()
+      assert {:ok, %OrderState{}} = Orders.delete_order_state(order_state)
+      assert_raise Ecto.NoResultsError, fn -> Orders.get_order_state!(order_state.id) end
+    end
+
+    test "change_order_state/1 returns a order_state changeset" do
+      order_state = order_state_fixture()
+      assert %Ecto.Changeset{} = Orders.change_order_state(order_state)
+    end
+  end
 end

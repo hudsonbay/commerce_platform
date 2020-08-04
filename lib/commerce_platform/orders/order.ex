@@ -3,8 +3,7 @@ defmodule CommercePlatform.Orders.Order do
   import Ecto.Changeset
 
   alias CommercePlatform.Accounts.User
-  alias CommercePlatform.Orders.Shipper
-  alias CommercePlatform.Orders.OrderDetail
+  alias CommercePlatform.Orders.{Shipper, OrderDetail, OrderState}
 
   schema "orders" do
     field :date_issued, :utc_datetime
@@ -14,11 +13,12 @@ defmodule CommercePlatform.Orders.Order do
     belongs_to(:user, User)
     belongs_to(:shipper, Shipper)
     has_many :order_details, OrderDetail
+    belongs_to(:order_state, OrderState)
 
     # TODO add state, default:unpaid
     # TODO add priority, default:normal
     # TODO Fix user relation
-    # TODO add order_status
+    # TODO add order_state
     timestamps(type: :utc_datetime)
   end
 
@@ -29,8 +29,16 @@ defmodule CommercePlatform.Orders.Order do
   @doc false
   def changeset(order, attrs) do
     order
-    |> cast(attrs, [:number, :date_issued, :delivery_date, :paid, :user_id, :shipper_id])
-    |> validate_required([:number, :date_issued, :paid, :user_id])
+    |> cast(attrs, [
+      :number,
+      :date_issued,
+      :delivery_date,
+      :paid,
+      :user_id,
+      :shipper_id,
+      :order_state_id
+    ])
+    |> validate_required([:number, :date_issued, :paid, :user_id, :order_state_id])
     |> foreign_key_constraint(:user)
   end
 end
