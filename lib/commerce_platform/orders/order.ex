@@ -15,7 +15,6 @@ defmodule CommercePlatform.Orders.Order do
     has_many :order_details, OrderDetail
     belongs_to(:order_state, OrderState)
 
-    # TODO add state, default:unpaid
     # TODO add priority, default:normal
     # TODO Fix user relation
     # TODO add order_state

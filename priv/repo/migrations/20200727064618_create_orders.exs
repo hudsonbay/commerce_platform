@@ -8,7 +8,7 @@ defmodule CommercePlatform.Repo.Migrations.CreateOrders do
       add :delivery_date, :timestamptz, null: true
       add :paid, :boolean, default: false, null: false
       add :shipper_id, references(:shippers, on_delete: :nothing)
-      add :user_id, references(:orders, on_delete: :nothing)
+      add :user_id, references(:users, on_delete: :nothing)
 
       timestamps(type: :timestamptz)
     end
