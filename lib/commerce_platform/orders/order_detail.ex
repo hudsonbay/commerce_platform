@@ -6,9 +6,10 @@ defmodule CommercePlatform.Orders.OrderDetail do
   alias CommercePlatform.Orders.Order
 
   schema "order_details" do
-    field :discount, :float
-    field :price, :float
-    field :quantity, :integer
+    field :discount, :decimal
+    field :price, :decimal
+    field :quantity, :integer, default: 1
+    field :total, :decimal
     belongs_to(:product, Product)
     belongs_to(:order, Order)
 
