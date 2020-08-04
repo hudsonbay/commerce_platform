@@ -25,7 +25,7 @@ defmodule CommercePlatform.World.Country do
   def changeset(country, attrs) do
     country
     |> cast(attrs, [:name, :iso, :iso3, :iso_name, :num_code, :has_states])
-    |> validate_required([:name, :iso, :iso3, :iso_name, :num_code, :has_states])
+    |> validate_required([:name, :iso, :iso3, :iso_name, :has_states])
     |> validate_length(:iso, is: 2)
     |> validate_length(:iso3, is: 3)
     |> unique_constraint(:iso)
