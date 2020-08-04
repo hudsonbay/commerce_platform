@@ -26,6 +26,9 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# Elixir Module containing data about Countries, states and their regions as per iso standard.
+config :worldly, :data_path, Path.join(Mix.Project.build_path(), "lib/worldly/priv/data")
+
 # Use Guardian for token based authentication
 config :commerce_platform, CommercePlatform.Guardian,
   issuer: "commerce_platform",

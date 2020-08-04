@@ -51,4 +51,6 @@
   "timex": {:hex, :timex, "3.6.2", "845cdeb6119e2fef10751c0b247b6c59d86d78554c83f78db612e3290f819bc2", [:mix], [{:combine, "~> 0.10", [hex: :combine, repo: "hexpm", optional: false]}, {:gettext, "~> 0.10", [hex: :gettext, repo: "hexpm", optional: false]}, {:tzdata, "~> 0.1.8 or ~> 0.5 or ~> 1.0.0", [hex: :tzdata, repo: "hexpm", optional: false]}], "hexpm", "26030b46199d02a590be61c2394b37ea25a3664c02fafbeca0b24c972025d47a"},
   "tzdata": {:hex, :tzdata, "1.0.3", "73470ad29dde46e350c60a66e6b360d3b99d2d18b74c4c349dbebbc27a09a3eb", [:mix], [{:hackney, "~> 1.0", [hex: :hackney, repo: "hexpm", optional: false]}], "hexpm", "a6e1ee7003c4d04ecbd21dd3ec690d4c6662db5d3bbdd7262d53cdf5e7c746c1"},
   "unicode_util_compat": {:hex, :unicode_util_compat, "0.5.0", "8516502659002cec19e244ebd90d312183064be95025a319a6c7e89f4bccd65b", [:rebar3], [], "hexpm", "d48d002e15f5cc105a696cf2f1bbb3fc72b4b770a184d8420c8db20da2674b38"},
+  "worldly": {:hex, :worldly, "0.1.2", "3b3304de5272bf7c4595c9304436787f1e6a772602a4776054e7bc2820826e56", [:mix], [], "hexpm", "aaadd0b115daa88cfc67565bf684d7ac3d65ebafa08448ea7edc89f2a65fd2d5"},
+  "yamerl": {:git, "https://github.com/yakaz/yamerl.git", "7789b02b56567c92e80b732b6bb518859c2fae5d", []},
 }
