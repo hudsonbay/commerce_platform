@@ -3,59 +3,19 @@ defmodule CommercePlatform.World.Country do
   import Ecto.Changeset
 
   schema "countries" do
-    field :capital, :integer
-    field :code, :string
-    field :code2, :string
-    field :continent, :string
-    field :gnp, :float
-    field :gnpold, :float
-    field :government_form, :string
-    field :head_of_state, :string
-    field :indepyear, :integer
-    field :life_expectancy, :float
-    field :local_name, :string
+    field :iso, :string
+    field :iso3, :string
+    field :iso_name, :string
     field :name, :string
-    field :population, :integer
-    field :region, :string
-    field :surface_area, :float
+    field :num_code, :string
+
+    timestamps()
   end
 
   @doc false
   def changeset(country, attrs) do
     country
-    |> cast(attrs, [
-      :code,
-      :name,
-      :continent,
-      :region,
-      :surface_area,
-      :indepyear,
-      :population,
-      :life_expectancy,
-      :gnp,
-      :gnpold,
-      :local_name,
-      :government_form,
-      :head_of_state,
-      :capital,
-      :code2
-    ])
-    |> validate_required([
-      :code,
-      :name,
-      :continent,
-      :region,
-      :surface_area,
-      :indepyear,
-      :population,
-      :life_expectancy,
-      :gnp,
-      :gnpold,
-      :local_name,
-      :government_form,
-      :head_of_state,
-      :capital,
-      :code2
-    ])
+    |> cast(attrs, [:name, :iso, :iso3, :iso_name, :num_code])
+    |> validate_required([:name, :iso, :iso3, :iso_name, :num_code])
   end
 end
