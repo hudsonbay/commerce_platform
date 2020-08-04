@@ -18,5 +18,6 @@ defmodule CommercePlatform.Stock.ProductSubcategory do
     product_subcategory
     |> cast(attrs, [:name, :description, :product_category_id])
     |> validate_required([:name, :description, :product_category_id])
+    |> foreign_key_constraint(:product_category_id)
   end
 end

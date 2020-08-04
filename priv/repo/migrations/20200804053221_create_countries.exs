@@ -7,8 +7,6 @@ defmodule CommercePlatform.Repo.Migrations.CreateCountries do
       add :iso, :string
       add :iso3, :string
       add :iso_name, :string
-      add :numcode, :string
-      add :has_states, :boolean, default: false
 
       timestamps
     end
@@ -17,6 +15,5 @@ defmodule CommercePlatform.Repo.Migrations.CreateCountries do
     create unique_index(:countries, [:iso])
     create unique_index(:countries, [:iso3])
     create unique_index(:countries, [:name])
-    create unique_index(:countries, [:numcode])
   end
 end

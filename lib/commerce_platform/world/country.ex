@@ -7,7 +7,6 @@ defmodule CommercePlatform.World.Country do
     field :iso3, :string
     field :iso_name, :string
     field :name, :string
-    field :num_code, :string
 
     timestamps()
   end
@@ -15,14 +14,13 @@ defmodule CommercePlatform.World.Country do
   @doc false
   def changeset(country, attrs) do
     country
-    |> cast(attrs, [:name, :iso, :iso3, :iso_name, :num_code])
+    |> cast(attrs, [:name, :iso, :iso3, :iso_name])
     |> validate_required([:name, :iso, :iso3, :iso_name])
     |> validate_length(:iso, is: 2)
     |> validate_length(:iso3, is: 3)
     |> unique_constraint(:iso)
     |> unique_constraint(:iso3)
     |> unique_constraint(:name)
-    |> unique_constraint(:numcode)
     |> build_iso_name
   end
 
