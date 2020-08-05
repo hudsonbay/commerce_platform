@@ -22,9 +22,18 @@ defmodule CommercePlatform.Stock do
   end
 
   @doc """
+  Returns the list of available products filtered by name
+  """
+  def list_available_products(%{matching: name}) when is_binary(name) do
+    Product
+    |> where([p], ilike(p.name, ^"%#{name}%"))
+    |> Repo.all()
+  end
+
+  @doc """
   Returns the list of the available products
   """
-  def list_available_products do
+  def list_available_products(_) do
     from(p in Product, where: p.stock > 0)
     |> Repo.all()
   end

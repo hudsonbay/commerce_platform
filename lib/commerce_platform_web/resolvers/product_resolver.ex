@@ -7,16 +7,9 @@ defmodule CommercePlatformWeb.Resolvers.ProductResolver do
     {:ok, Stock.list_products()}
   end
 
-  def available_products(_, _, %{context: context}) do
+  def available_products(_, args, %{context: context}) do
     IO.inspect(context)
-    {:ok, Stock.list_available_products()}
-  end
-
-  # TODO fix function available_products when it has to match a product name because it's not doing it
-  def available_products(_, %{matching: name}, %{context: context}) do
-    IO.inspect(context)
-    query = from p in Stock.Product, where: ilike(p.name, ^"%#{name}%")
-    {:ok, Repo.all(query)}
+    {:ok, Stock.list_available_products(args)}
   end
 
   def out_of_stock_products(_, _, %{context: context}) do
