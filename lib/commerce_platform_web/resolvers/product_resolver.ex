@@ -1,6 +1,5 @@
 defmodule CommercePlatformWeb.Resolvers.ProductResolver do
-  alias CommercePlatform.{Stock, Repo}
-  import Ecto.Query
+  alias CommercePlatform.Stock
 
   def all_products(_, _, %{context: context}) do
     IO.inspect(context)

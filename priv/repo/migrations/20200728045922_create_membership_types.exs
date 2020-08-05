@@ -9,6 +9,5 @@ defmodule CommercePlatform.Repo.Migrations.CreateMembershipTypes do
 
       timestamps()
     end
-
   end
 end
