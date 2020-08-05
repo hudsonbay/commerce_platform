@@ -10,4 +10,5 @@ defmodule CommercePlatformWeb.Schema.Types do
   import_types(Types.OrderType)
   import_types(Types.MembershipType)
   import_types(Types.ProductSubcategoryType)
+  import_types(Types.CountryType)
 end

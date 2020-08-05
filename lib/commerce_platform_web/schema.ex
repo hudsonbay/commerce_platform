@@ -20,6 +20,12 @@ defmodule CommercePlatformWeb.Schema do
       resolve(&Resolvers.UserResolver.get_user_by_id/2)
     end
 
+    # Countries queries
+    @desc "Get a list of all countries"
+    field :all_countries, list_of(:country_type) do
+      resolve(&Resolvers.CountryResolver.countries/3)
+    end
+
     # Products queries
     @desc "Get a list of all products"
     field :all_products, list_of(:product_type) do
