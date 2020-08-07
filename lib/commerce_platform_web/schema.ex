@@ -51,6 +51,12 @@ defmodule CommercePlatformWeb.Schema do
       resolve(&Resolvers.ProductResolver.running_out_products/3)
     end
 
+    @desc "Get a list of all products that belongs to a certain subcategory"
+    field :filter_products_by_subcategory, list_of(:product_type) do
+      arg(:id, non_null(:id))
+      resolve(&Resolvers.ProductResolver.filter_products_by_subcategory/3)
+    end
+
     @desc "Get a product by id"
     field :get_product_by_id, type: :product_type do
       arg(:id, non_null(:id))

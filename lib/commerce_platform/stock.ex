@@ -7,6 +7,7 @@ defmodule CommercePlatform.Stock do
   alias CommercePlatform.Repo
 
   alias CommercePlatform.Stock.Product
+  alias CommercePlatform.Stock.ProductSubcategory
 
   @doc """
   Returns the list of all products.
@@ -35,6 +36,21 @@ defmodule CommercePlatform.Stock do
   """
   def list_available_products(_) do
     from(p in Product, where: p.stock > 0)
+    |> Repo.all()
+  end
+
+  # TODO fix this query
+  # SELECT p.name FROM "public".products p INNER JOIN "public".product_subcategories ps ON ( p.product_subcategory_id = ps.id  )  
+  # WHERE ps.name = 'Frozen'
+  @doc """
+  Returns the list of all products that belongs to a certain subcategory
+  """
+  def filter_products_by_subcategory(id) do
+    from(p in Product,
+      join: ps in assoc(p, :product_subcategory),
+      where: ps.id == ^id,
+      select: p
+    )
     |> Repo.all()
   end
 

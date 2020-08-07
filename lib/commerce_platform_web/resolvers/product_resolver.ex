@@ -11,6 +11,10 @@ defmodule CommercePlatformWeb.Resolvers.ProductResolver do
     {:ok, Stock.list_available_products(args)}
   end
 
+  def filter_products_by_subcategory(_, %{id: id}, _info) do
+    {:ok, Stock.filter_products_by_subcategory(id)}
+  end
+
   def out_of_stock_products(_, _, %{context: context}) do
     IO.inspect(context)
     {:ok, Stock.list_out_of_stock_products()}
@@ -22,9 +26,9 @@ defmodule CommercePlatformWeb.Resolvers.ProductResolver do
   end
 
   # TODO: Fix case product not found
-  def get_product_by_id(%{id: id}, _info) do
+  def get_product_by_id(_, %{id: id}, _info) do
     case Stock.get_product!(id) do
-      nil -> {:error, "Product id #{id} not found"}
+      nil -> {:error, "Product with id: #{id} not found"}
       product -> {:ok, product}
     end
   end
