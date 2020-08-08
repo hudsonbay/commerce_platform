@@ -19,7 +19,6 @@ alias CommercePlatform.Stock.ProductCategory
 alias CommercePlatform.Stock.ProductSubcategory
 alias CommercePlatform.Accounts.MembershipType
 alias CommercePlatform.Stock.Product
-alias CommercePlatform.Accounts.User
 alias CommercePlatform.Accounts.ShippingAddress
 
 # Load countries
@@ -276,12 +275,12 @@ Repo.insert!(%ProductSubcategory{
 })
 
 # inserting fake products
-for p <- 0..25 do
+for _ <- 0..25 do
   name = Faker.Commerce.En.product_name()
   price = Faker.Commerce.price()
   weight = Faker.Commerce.price()
   size = Faker.Commerce.price()
-  description = Faker.Commerce.En.product_name_adjective()
+  description = Faker.Lorem.paragraph()
   thumbnail = Faker.File.file_name(:image)
   stock = Faker.random_between(1, 25)
   product_subcategory_id = Faker.random_between(1, 27)
@@ -320,17 +319,17 @@ Repo.insert!(%MembershipType{
 })
 
 # inserting fake users
-for u <- 0..25 do
+for _ <- 0..10 do
   first_name = Faker.Person.first_name()
   last_name = Faker.Person.last_name()
   email = Faker.Internet.email()
-  password = "123qweasd"
-  password_confirmation = "123qweasd"
+  password = "User-123"
+  password_confirmation = "User-123"
   role = "user"
   phone = Faker.Phone.EnUs.phone()
   membership_type_id = Faker.random_between(1, 3)
 
-  user = %User{
+  user = %{
     first_name: first_name,
     last_name: last_name,
     email: email,
@@ -341,15 +340,31 @@ for u <- 0..25 do
     membership_type_id: membership_type_id
   }
 
-  Repo.insert!(user)
+  {:ok, _} = CommercePlatform.Accounts.create_user(user)
+
+  # Repo.insert!(user)
 end
 
+# inserting admin user
+admin = %{
+  first_name: "Manuel",
+  last_name: "Menendez",
+  email: "manuel@gmail.com",
+  password: "User-123",
+  password_confirmation: "User-123",
+  role: "admin",
+  phone: "76499650",
+  membership_type_id: 1
+}
+
+{:ok, _} = CommercePlatform.Accounts.create_user(admin)
+
 # insert fake shipping addresses
-for sa <- 0..50 do
+for _ <- 0..50 do
   address = Faker.Address.En.secondary_address()
   postal_code = Faker.Address.En.zip_code()
   phone = Faker.Phone.EnUs.phone()
-  user_id = Faker.random_between(1, 25)
+  user_id = Faker.random_between(1, 10)
   country_id = Faker.random_between(1, 200)
 
   shipping_address = %ShippingAddress{
