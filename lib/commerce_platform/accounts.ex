@@ -392,6 +392,15 @@ defmodule CommercePlatform.Accounts do
 
   alias CommercePlatform.Accounts.ShippingAddress
 
+  def list_shipping_addresses_by_user(id) do
+    from(sa in ShippingAddress,
+      join: user in assoc(sa, :user),
+      where: user.id == ^id,
+      select: sa
+    )
+    |> Repo.all()
+  end
+
   @doc """
   Returns the list of shipping_addresses.
 
