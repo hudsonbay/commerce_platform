@@ -8,6 +8,7 @@ defmodule CommercePlatform.Repo.Migrations.CreateUsers do
       add :email, :string
       add :password_hash, :string
       add :role, :string
+      add :phone, :string
 
       timestamps()
     end

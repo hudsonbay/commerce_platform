@@ -389,4 +389,100 @@ defmodule CommercePlatform.Accounts do
   def change_permission(%Permission{} = permission, attrs \\ %{}) do
     Permission.changeset(permission, attrs)
   end
+
+  alias CommercePlatform.Accounts.ShippingAddress
+
+  @doc """
+  Returns the list of shipping_addresses.
+
+  ## Examples
+
+      iex> list_shipping_addresses()
+      [%ShippingAddress{}, ...]
+
+  """
+  def list_shipping_addresses do
+    Repo.all(ShippingAddress)
+  end
+
+  @doc """
+  Gets a single shipping_address.
+
+  Raises `Ecto.NoResultsError` if the Shipping address does not exist.
+
+  ## Examples
+
+      iex> get_shipping_address!(123)
+      %ShippingAddress{}
+
+      iex> get_shipping_address!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_shipping_address!(id), do: Repo.get!(ShippingAddress, id)
+
+  @doc """
+  Creates a shipping_address.
+
+  ## Examples
+
+      iex> create_shipping_address(%{field: value})
+      {:ok, %ShippingAddress{}}
+
+      iex> create_shipping_address(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_shipping_address(attrs \\ %{}) do
+    %ShippingAddress{}
+    |> ShippingAddress.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a shipping_address.
+
+  ## Examples
+
+      iex> update_shipping_address(shipping_address, %{field: new_value})
+      {:ok, %ShippingAddress{}}
+
+      iex> update_shipping_address(shipping_address, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_shipping_address(%ShippingAddress{} = shipping_address, attrs) do
+    shipping_address
+    |> ShippingAddress.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a shipping_address.
+
+  ## Examples
+
+      iex> delete_shipping_address(shipping_address)
+      {:ok, %ShippingAddress{}}
+
+      iex> delete_shipping_address(shipping_address)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_shipping_address(%ShippingAddress{} = shipping_address) do
+    Repo.delete(shipping_address)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking shipping_address changes.
+
+  ## Examples
+
+      iex> change_shipping_address(shipping_address)
+      %Ecto.Changeset{data: %ShippingAddress{}}
+
+  """
+  def change_shipping_address(%ShippingAddress{} = shipping_address, attrs \\ %{}) do
+    ShippingAddress.changeset(shipping_address, attrs)
+  end
 end

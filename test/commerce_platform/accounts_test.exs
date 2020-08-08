@@ -264,4 +264,65 @@ defmodule CommercePlatform.AccountsTest do
   #     assert %Ecto.Changeset{} = Accounts.change_permission(permission)
   #   end
   # end
+
+  describe "shipping_addresses" do
+    alias CommercePlatform.Accounts.ShippingAddress
+
+    @valid_attrs %{address: "some address", postal_code: "some postal_code"}
+    @update_attrs %{address: "some updated address", postal_code: "some updated postal_code"}
+    @invalid_attrs %{address: nil, postal_code: nil}
+
+    def shipping_address_fixture(attrs \\ %{}) do
+      {:ok, shipping_address} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Accounts.create_shipping_address()
+
+      shipping_address
+    end
+
+    test "list_shipping_addresses/0 returns all shipping_addresses" do
+      shipping_address = shipping_address_fixture()
+      assert Accounts.list_shipping_addresses() == [shipping_address]
+    end
+
+    test "get_shipping_address!/1 returns the shipping_address with given id" do
+      shipping_address = shipping_address_fixture()
+      assert Accounts.get_shipping_address!(shipping_address.id) == shipping_address
+    end
+
+    test "create_shipping_address/1 with valid data creates a shipping_address" do
+      assert {:ok, %ShippingAddress{} = shipping_address} = Accounts.create_shipping_address(@valid_attrs)
+      assert shipping_address.address == "some address"
+      assert shipping_address.postal_code == "some postal_code"
+    end
+
+    test "create_shipping_address/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_shipping_address(@invalid_attrs)
+    end
+
+    test "update_shipping_address/2 with valid data updates the shipping_address" do
+      shipping_address = shipping_address_fixture()
+      assert {:ok, %ShippingAddress{} = shipping_address} = Accounts.update_shipping_address(shipping_address, @update_attrs)
+      assert shipping_address.address == "some updated address"
+      assert shipping_address.postal_code == "some updated postal_code"
+    end
+
+    test "update_shipping_address/2 with invalid data returns error changeset" do
+      shipping_address = shipping_address_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_shipping_address(shipping_address, @invalid_attrs)
+      assert shipping_address == Accounts.get_shipping_address!(shipping_address.id)
+    end
+
+    test "delete_shipping_address/1 deletes the shipping_address" do
+      shipping_address = shipping_address_fixture()
+      assert {:ok, %ShippingAddress{}} = Accounts.delete_shipping_address(shipping_address)
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_shipping_address!(shipping_address.id) end
+    end
+
+    test "change_shipping_address/1 returns a shipping_address changeset" do
+      shipping_address = shipping_address_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_shipping_address(shipping_address)
+    end
+  end
 end

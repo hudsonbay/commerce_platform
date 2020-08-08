@@ -16,12 +16,6 @@ defmodule CommercePlatform.Accounts.User do
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
 
-    field :shipping_address, :string
-    field :shipping_city, :string
-    field :shipping_region, :string
-    field :shipping_state, :string
-    field :shipping_postal_code, :string
-
     field :billing_address, :string
     field :billing_city, :string
     field :billing_region, :string
