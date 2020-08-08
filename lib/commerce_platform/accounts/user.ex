@@ -3,6 +3,7 @@ defmodule CommercePlatform.Accounts.User do
   import Ecto.Changeset
 
   alias CommercePlatform.Accounts.MembershipType
+  alias CommercePlatform.Accounts.ShippingAddress
 
   schema "users" do
     field :email, :string, unique: true
@@ -16,15 +17,9 @@ defmodule CommercePlatform.Accounts.User do
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
 
-    field :billing_address, :string
-    field :billing_city, :string
-    field :billing_region, :string
-    field :billing_state, :string
-    field :billing_postal_code, :string
+    has_many :shipping_addresses, ShippingAddress
 
-    # TODO: add these fields credit_card, credit_card_type_id, shipping_country_id belongs_to :country, Country, field :shipping_country, :string, 
-    # field :billing_country, :string
-    # TODO: see if there's gonna be an address 1 and address 2, and subsequently a default address
+    # TODO: add these fields credit_card, credit_card_type_id, 
     # TODO: Que al registrar un nuevo usuario tenga  por defecto el campo membership_type_id con la referencia al id 1 :none y que sea requerido
 
     timestamps()
@@ -45,16 +40,7 @@ defmodule CommercePlatform.Accounts.User do
       :password_confirmation,
       :role,
       :membership_type_id,
-      :shipping_address,
-      :shipping_city,
-      :shipping_region,
-      :shipping_state,
-      :shipping_postal_code,
-      :billing_address,
-      :billing_city,
-      :billing_region,
-      :billing_state,
-      :billing_postal_code
+      :phone
     ])
     |> validate_required([
       :first_name,
