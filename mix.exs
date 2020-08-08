@@ -52,6 +52,7 @@ defmodule CommercePlatform.MixProject do
       {:absinthe, "~> 1.4.0"},
       {:absinthe_plug, "~> 1.4.0"},
       {:absinthe_ecto, "~> 0.1.3"},
+      {:dataloader, "~> 1.0.0"},
       {:guardian, "~> 2.0"},
       {:timex, "~> 3.5"},
       {:pdf_generator, "~> 0.6.2"},
