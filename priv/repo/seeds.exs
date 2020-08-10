@@ -11,11 +11,18 @@
 # and so on) as they will fail if something goes wrong.
 alias CommercePlatform.Repo
 
+Faker.start()
+
 alias CommercePlatform.Measurements.MeasurementType
 alias CommercePlatform.Measurements.MeasurementUnit
 alias CommercePlatform.Stock.ProductCategory
 alias CommercePlatform.Stock.ProductSubcategory
 alias CommercePlatform.Accounts.MembershipType
+alias CommercePlatform.Stock.Product
+alias CommercePlatform.Accounts.ShippingAddress
+
+# Load countries
+CommercePlatform.World.Seeds.seed!()
 
 # inserting measurement types
 Repo.insert!(%MeasurementType{type: "Length"})
@@ -267,6 +274,31 @@ Repo.insert!(%ProductSubcategory{
   description: ""
 })
 
+# inserting fake products
+for _ <- 0..25 do
+  name = Faker.Commerce.En.product_name()
+  price = Faker.Commerce.price()
+  weight = Faker.Commerce.price()
+  size = Faker.Commerce.price()
+  description = Faker.Lorem.paragraph()
+  thumbnail = Faker.File.file_name(:image)
+  stock = Faker.random_between(1, 25)
+  product_subcategory_id = Faker.random_between(1, 27)
+
+  prod = %Product{
+    name: name,
+    price: price,
+    weight: weight,
+    size: size,
+    description: description,
+    thumbnail: thumbnail,
+    stock: stock,
+    product_subcategory_id: product_subcategory_id
+  }
+
+  Repo.insert!(prod)
+end
+
 # inserting membership types
 Repo.insert!(%MembershipType{
   name: "NONE",
@@ -286,5 +318,62 @@ Repo.insert!(%MembershipType{
   card_img: "golden.jpg"
 })
 
-# Load countries
-CommercePlatform.World.Seeds.seed!()
+# inserting fake users
+for _ <- 0..10 do
+  first_name = Faker.Person.first_name()
+  last_name = Faker.Person.last_name()
+  email = Faker.Internet.email()
+  password = "User-123"
+  password_confirmation = "User-123"
+  role = "user"
+  phone = Faker.Phone.EnUs.phone()
+  membership_type_id = Faker.random_between(1, 3)
+
+  user = %{
+    first_name: first_name,
+    last_name: last_name,
+    email: email,
+    password: password,
+    password_confirmation: password_confirmation,
+    role: role,
+    phone: phone,
+    membership_type_id: membership_type_id
+  }
+
+  {:ok, _} = CommercePlatform.Accounts.create_user(user)
+
+  # Repo.insert!(user)
+end
+
+# inserting admin user
+admin = %{
+  first_name: "Manuel",
+  last_name: "Menendez",
+  email: "manuel@gmail.com",
+  password: "User-123",
+  password_confirmation: "User-123",
+  role: "admin",
+  phone: "76499650",
+  membership_type_id: 1
+}
+
+{:ok, _} = CommercePlatform.Accounts.create_user(admin)
+
+# insert fake shipping addresses
+for _ <- 0..50 do
+  address = Faker.Address.En.secondary_address()
+  postal_code = Faker.Address.En.zip_code()
+  phone = Faker.Phone.EnUs.phone()
+  user_id = Faker.random_between(1, 10)
+  country_id = Faker.random_between(1, 200)
+
+  shipping_address = %ShippingAddress{
+    address: address,
+    postal_code: postal_code,
+    phone: phone,
+    user_id: user_id,
+    country_id: country_id
+  }
+
+  Repo.insert!(shipping_address)
+end

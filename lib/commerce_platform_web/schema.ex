@@ -60,7 +60,7 @@ defmodule CommercePlatformWeb.Schema do
     @desc "Get a product by id"
     field :get_product_by_id, type: :product_type do
       arg(:id, non_null(:id))
-      resolve(&Resolvers.ProductResolver.get_product_by_id/2)
+      resolve(&Resolvers.ProductResolver.get_product_by_id/3)
     end
 
     @desc "Get a list of all product categories"
