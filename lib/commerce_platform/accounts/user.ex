@@ -20,7 +20,8 @@ defmodule CommercePlatform.Accounts.User do
     has_many :shipping_addresses, ShippingAddress
 
     # TODO: add these fields credit_card, credit_card_type_id, 
-    # TODO: Que al registrar un nuevo usuario tenga  por defecto el campo membership_type_id con la referencia al id 1 :none y que sea requerido
+    # TODO: Que al registrar un nuevo usuario tenga  por defecto el campo membership_type_id
+    # con la referencia al id 1 :none y que sea requerido
 
     timestamps()
   end

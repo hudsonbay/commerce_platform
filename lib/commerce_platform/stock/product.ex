@@ -15,6 +15,7 @@ defmodule CommercePlatform.Stock.Product do
     field :thumbnail, :string
     belongs_to :product_subcategory, ProductSubcategory
     # TODO: add unidad_de_medida
+    # TODO: add product features, like Amazon does
     timestamps()
   end
 
