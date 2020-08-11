@@ -56,10 +56,18 @@ defmodule CommercePlatform.Accounts.User do
     |> update_change(:email, &String.downcase(&1))
     |> validate_length(:password, min: 6, max: 100)
     |> validate_confirmation(:password)
+    # By default, Ecto infers the constraint name for us, but it can also be given with the :name option. Calling
+    # unique_constraint won’t perform any validation on the spot. Instead, it stores all the relevant information in
+    # the changeset. When it’s time, the repository can convert those constraints into a human-readable error
     |> unique_constraint(:email)
     |> hash_password
   end
 
+  # We check to see if the changeset is valid so we won’t waste time hashing an
+  # invalid or missing password. Then, we use Argon2 to hash our password,
+  # following the instructions in its readme file. Finally, we put the result into the
+  # changeset as password_hash. If the changeset is invalid, we simply return it to
+  # the caller.
   defp hash_password(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
     change(changeset, Argon2.add_hash(password))
   end
