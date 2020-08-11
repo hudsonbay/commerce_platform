@@ -23,5 +23,6 @@ defmodule CommercePlatform.Orders.Shipper do
     shipper
     |> cast(attrs, [:company_name, :description, :phone, :email, :website, :picture, :country_id])
     |> validate_required([:company_name, :description, :phone, :email, :country_id])
+    |> assoc_constraint(:country)
   end
 end
