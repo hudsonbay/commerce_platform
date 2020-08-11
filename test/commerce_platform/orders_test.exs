@@ -238,7 +238,7 @@ defmodule CommercePlatform.OrdersTest do
   # end
 
   describe "order_state" do
-    alias CommercePlatform.Orders.OrderState
+    alias CommercePlatform.Orders.OrderStatus
 
     @valid_attrs %{description: "some description", name: "some name"}
     @update_attrs %{description: "some updated description", name: "some updated name"}
@@ -264,7 +264,7 @@ defmodule CommercePlatform.OrdersTest do
     end
 
     test "create_order_state/1 with valid data creates a order_state" do
-      assert {:ok, %OrderState{} = order_state} = Orders.create_order_state(@valid_attrs)
+      assert {:ok, %OrderStatus{} = order_state} = Orders.create_order_state(@valid_attrs)
       assert order_state.description == "some description"
       assert order_state.name == "some name"
     end
@@ -276,7 +276,7 @@ defmodule CommercePlatform.OrdersTest do
     test "update_order_state/2 with valid data updates the order_state" do
       order_state = order_state_fixture()
 
-      assert {:ok, %OrderState{} = order_state} =
+      assert {:ok, %OrderStatus{} = order_state} =
                Orders.update_order_state(order_state, @update_attrs)
 
       assert order_state.description == "some updated description"
@@ -291,7 +291,7 @@ defmodule CommercePlatform.OrdersTest do
 
     test "delete_order_state/1 deletes the order_state" do
       order_state = order_state_fixture()
-      assert {:ok, %OrderState{}} = Orders.delete_order_state(order_state)
+      assert {:ok, %OrderStatus{}} = Orders.delete_order_state(order_state)
       assert_raise Ecto.NoResultsError, fn -> Orders.get_order_state!(order_state.id) end
     end
 

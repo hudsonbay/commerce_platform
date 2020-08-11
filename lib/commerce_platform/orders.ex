@@ -294,7 +294,7 @@ defmodule CommercePlatform.Orders do
     OrderDetail.changeset(order_detail, attrs)
   end
 
-  alias CommercePlatform.Orders.OrderState
+  alias CommercePlatform.Orders.OrderStatus
 
   @doc """
   Returns the list of order_state.
@@ -302,11 +302,11 @@ defmodule CommercePlatform.Orders do
   ## Examples
 
       iex> list_order_state()
-      [%OrderState{}, ...]
+      [%OrderStatus{}, ...]
 
   """
   def list_order_state do
-    Repo.all(OrderState)
+    Repo.all(OrderStatus)
   end
 
   @doc """
@@ -317,13 +317,13 @@ defmodule CommercePlatform.Orders do
   ## Examples
 
       iex> get_order_state!(123)
-      %OrderState{}
+      %OrderStatus{}
 
       iex> get_order_state!(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_order_state!(id), do: Repo.get!(OrderState, id)
+  def get_order_state!(id), do: Repo.get!(OrderStatus, id)
 
   @doc """
   Creates a order_state.
@@ -331,15 +331,15 @@ defmodule CommercePlatform.Orders do
   ## Examples
 
       iex> create_order_state(%{field: value})
-      {:ok, %OrderState{}}
+      {:ok, %OrderStatus{}}
 
       iex> create_order_state(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
   def create_order_state(attrs \\ %{}) do
-    %OrderState{}
-    |> OrderState.changeset(attrs)
+    %OrderStatus{}
+    |> OrderStatus.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -349,15 +349,15 @@ defmodule CommercePlatform.Orders do
   ## Examples
 
       iex> update_order_state(order_state, %{field: new_value})
-      {:ok, %OrderState{}}
+      {:ok, %OrderStatus{}}
 
       iex> update_order_state(order_state, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_order_state(%OrderState{} = order_state, attrs) do
+  def update_order_state(%OrderStatus{} = order_state, attrs) do
     order_state
-    |> OrderState.changeset(attrs)
+    |> OrderStatus.changeset(attrs)
     |> Repo.update()
   end
 
@@ -367,13 +367,13 @@ defmodule CommercePlatform.Orders do
   ## Examples
 
       iex> delete_order_state(order_state)
-      {:ok, %OrderState{}}
+      {:ok, %OrderStatus{}}
 
       iex> delete_order_state(order_state)
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_order_state(%OrderState{} = order_state) do
+  def delete_order_state(%OrderStatus{} = order_state) do
     Repo.delete(order_state)
   end
 
@@ -383,10 +383,10 @@ defmodule CommercePlatform.Orders do
   ## Examples
 
       iex> change_order_state(order_state)
-      %Ecto.Changeset{data: %OrderState{}}
+      %Ecto.Changeset{data: %OrderStatus{}}
 
   """
-  def change_order_state(%OrderState{} = order_state, attrs \\ %{}) do
-    OrderState.changeset(order_state, attrs)
+  def change_order_state(%OrderStatus{} = order_state, attrs \\ %{}) do
+    OrderStatus.changeset(order_state, attrs)
   end
 end
