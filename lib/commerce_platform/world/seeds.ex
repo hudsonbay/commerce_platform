@@ -12,7 +12,7 @@ defmodule CommercePlatform.World.Seeds do
         to_param(country)
       )
 
-    inserted_country = Repo.insert!(change)
+    Repo.insert!(change)
   end
 
   defp to_param(%Worldly.Country{
