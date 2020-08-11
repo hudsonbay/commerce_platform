@@ -11,6 +11,7 @@ defmodule CommercePlatformWeb.Schema.Types.OrderType do
     field(:delivery_date, :datetime)
     field(:paid, :boolean)
     field(:user, :user_type, resolve: assoc(:user))
+    field(:order_status, :order_status_type, resolve: assoc(:order_status))
     # field(:shipper, :shipper_type, resolve: assoc(:shipper))
   end
 
