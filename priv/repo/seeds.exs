@@ -20,6 +20,8 @@ alias CommercePlatform.Stock.ProductSubcategory
 alias CommercePlatform.Accounts.MembershipType
 alias CommercePlatform.Stock.Product
 alias CommercePlatform.Accounts.ShippingAddress
+alias CommercePlatform.Orders.OrderStatus
+alias CommercePlatform.Orders.Shipper
 
 # Load countries
 CommercePlatform.World.Seeds.seed!()
@@ -377,3 +379,48 @@ for _ <- 0..50 do
 
   Repo.insert!(shipping_address)
 end
+
+# inserting order status
+Repo.insert!(%OrderStatus{
+  name: "Processing",
+  description: "Order being processed by the system"
+})
+
+Repo.insert!(%OrderStatus{
+  name: "Queued",
+  description: "The order is on queue"
+})
+
+Repo.insert!(%OrderStatus{
+  name: "Delivering",
+  description: "Order is being delivered"
+})
+
+Repo.insert!(%OrderStatus{
+  name: "Delivered",
+  description: "Order was delivered"
+})
+
+Repo.insert!(%OrderStatus{
+  name: "Paid",
+  description: "Order was paid"
+})
+
+# inserting shipping companies
+Repo.insert!(%Shipper{
+  company_name: "Aerovaradero",
+  description: "Aerovaradero description",
+  phone: "54673459560",
+  email: "aerovaradero@aero.com",
+  website: "https://www.aerovaradero.com",
+  picture: "aero.jpg"
+})
+
+Repo.insert!(%Shipper{
+  company_name: "Cubapack",
+  description: "Cubapack description",
+  phone: "3593960560",
+  email: "cuba@pack.com",
+  website: "https://www.cubapack.com",
+  picture: "cpack.jpg"
+})
