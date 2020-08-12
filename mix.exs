@@ -63,6 +63,7 @@ defmodule CommercePlatform.MixProject do
       {:worldly, "~> 0.1.2"},
       {:faker, "~> 0.14.0"},
       {:absinthe_error_payload, "~> 1.0"}
+     # {:dlex, "~> 0.1.0"}
     ]
   end
 
