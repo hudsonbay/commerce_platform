@@ -61,7 +61,8 @@ defmodule CommercePlatform.MixProject do
       {:bodyguard, "~> 2.4"},
       {:yamerl, github: "yakaz/yamerl"},
       {:worldly, "~> 0.1.2"},
-      {:faker, "~> 0.14.0"}
+      {:faker, "~> 0.14.0"},
+      {:absinthe_error_payload, "~> 1.0"}
     ]
   end
 
