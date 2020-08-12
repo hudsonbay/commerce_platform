@@ -62,8 +62,9 @@ defmodule CommercePlatform.MixProject do
       {:yamerl, github: "yakaz/yamerl"},
       {:worldly, "~> 0.1.2"},
       {:faker, "~> 0.14.0"},
-      {:absinthe_error_payload, "~> 1.0"}
-     # {:dlex, "~> 0.1.0"}
+      {:absinthe_error_payload, "~> 1.0"},
+      {:dlex, "~> 0.5.1"},
+      {:cowlib, "~> 2.9.1", override: true}
     ]
   end
 
