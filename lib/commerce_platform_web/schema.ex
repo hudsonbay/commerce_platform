@@ -117,4 +117,9 @@ defmodule CommercePlatformWeb.Schema do
   # subscription do
 
   # end
+
+  enum :sort_order do
+    value(:asc)
+    value(:desc)
+  end
 end
