@@ -11,9 +11,9 @@ defmodule CommercePlatform.Repo.Migrations.CreateOrders do
       add :user_id, references(:users, on_delete: :nothing)
 
       timestamps(type: :timestamptz)
-
-      create unique_index([:orders, [:number]])
-      create index(:orders, [:user_id, :shipper_id])
     end
+
+    create unique_index(:orders, [:number])
+    create index(:orders, [:user_id, :shipper_id])
   end
 end

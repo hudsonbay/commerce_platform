@@ -7,7 +7,7 @@ defmodule CommercePlatform.Repo.Migrations.CreateOrderDetails do
       add :unit_price, :float
       add :quantity, :integer
       add :total, :float
-      add :order_id, references(:orders, on_delete: :delete_all). null: false
+      add :order_id, references(:orders, on_delete: :delete_all), null: false
       add :product_id, references(:products, on_delete: :nothing), null: false
 
       timestamps()

@@ -7,8 +7,8 @@ defmodule CommercePlatform.Repo.Migrations.CreateOrderStatus do
       add :description, :text
 
       timestamps()
-
-      create unique_index(:orders, [:order_status])
     end
+
+    create unique_index(:order_status, [:name])
   end
 end

@@ -8,8 +8,8 @@ defmodule CommercePlatform.Repo.Migrations.CreateMembershipTypes do
       add :card_img, :string
 
       timestamps()
-
-      create unique_index(:membership_types, [:name])
     end
+
+    create unique_index(:membership_types, [:name])
   end
 end
