@@ -6,8 +6,8 @@ defmodule CommercePlatform.Repo.Migrations.CreateShippingAddresses do
       add :address, :text
       add :postal_code, :string
       add :phone, :string
-      add :country_id, references(:countries, on_delete: :nothing)
-      add :user_id, references(:users, on_delete: :delete_all)
+      add :country_id, references(:countries, on_delete: :nothing), null: false
+      add :user_id, references(:users, on_delete: :delete_all), null: false
 
       timestamps()
     end

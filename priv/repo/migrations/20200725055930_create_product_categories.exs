@@ -7,6 +7,8 @@ defmodule CommercePlatform.Repo.Migrations.CreateProductCategories do
       add :description, :text
 
       timestamps()
+
+      create unique_index(:product_categories, [:name])
     end
   end
 end

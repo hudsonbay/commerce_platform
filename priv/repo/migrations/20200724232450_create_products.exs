@@ -10,6 +10,7 @@ defmodule CommercePlatform.Repo.Migrations.CreateProducts do
       add :description, :text
       add :thumbnail, :string
       add :image, :string
+      add :stock, :integer
 
       timestamps()
     end
