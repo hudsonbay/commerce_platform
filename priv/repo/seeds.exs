@@ -413,7 +413,8 @@ Repo.insert!(%Shipper{
   phone: "54673459560",
   email: "aerovaradero@aero.com",
   website: "https://www.aerovaradero.com",
-  picture: "aero.jpg"
+  picture: "aero.jpg",
+  country_id: 54
 })
 
 Repo.insert!(%Shipper{
@@ -422,5 +423,6 @@ Repo.insert!(%Shipper{
   phone: "3593960560",
   email: "cuba@pack.com",
   website: "https://www.cubapack.com",
-  picture: "cpack.jpg"
+  picture: "cpack.jpg",
+  country_id: 23
 })
