@@ -25,9 +25,8 @@ defmodule CommercePlatformWeb.Resolvers.ProductResolver do
     {:ok, Stock.list_running_out_products()}
   end
 
-  # TODO: Fix case product not found
   def get_product_by_id(_, %{id: id}, _info) do
-    case Stock.get_product!(id) do
+    case Stock.get_product(id) do
       nil -> {:error, "Product with id: #{id} not found"}
       product -> {:ok, product}
     end
