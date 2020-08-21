@@ -46,6 +46,17 @@ defmodule CommercePlatform.Accounts do
   end
 
   @doc """
+  Returns either {:ok, record} or {:error, reason}, with the latter giving a chance
+  to return a HTTP 404 from the resolver.
+  """
+  def get_user(id) do
+    User
+    |> Repo.get(id)
+    |> Repo.preload(:membership_type)
+    |> Repo.preload(:shipping_addresses)
+  end
+
+  @doc """
   Creates a user.
 
   ## Examples
