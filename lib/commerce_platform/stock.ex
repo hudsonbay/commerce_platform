@@ -85,6 +85,12 @@ defmodule CommercePlatform.Stock do
   def get_product!(id), do: Repo.get!(Product, id)
 
   @doc """
+  Returns either {:ok, record} or {:error, reason}, with the latter giving a chance
+  to return a HTTP 404 from the resolver.
+  """
+  def get_product(id), do: Repo.get(Product, id)
+
+  @doc """
   Creates a product.
 
   ## Examples
