@@ -19,8 +19,7 @@ defmodule CommercePlatform.Accounts.User do
 
     has_many :shipping_addresses, ShippingAddress
 
-    # TODO: add these fields credit_card, credit_card_type_id, 
-    # TODO: Que al registrar un nuevo usuario tenga  por defecto el campo membership_type_id
+    # TODO: add these fields credit_card, credit_card_type_id
     # con la referencia al id 1 :none y que sea requerido
 
     timestamps()
@@ -50,7 +49,6 @@ defmodule CommercePlatform.Accounts.User do
       :password,
       :password_confirmation,
       :role
-      # :membership_type_id
     ])
     |> validate_format(:email, ~r/@/)
     |> update_change(:email, &String.downcase(&1))
@@ -61,6 +59,7 @@ defmodule CommercePlatform.Accounts.User do
     # the changeset. When it’s time, the repository can convert those constraints into a human-readable error
     |> unique_constraint(:email)
     |> hash_password
+    |> put_change(:membership_type_id, 1)
   end
 
   # We check to see if the changeset is valid so we won’t waste time hashing an
