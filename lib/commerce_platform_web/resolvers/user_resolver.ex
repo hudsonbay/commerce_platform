@@ -19,9 +19,8 @@ defmodule CommercePlatformWeb.Resolvers.UserResolver do
     {:ok, Accounts.list_shipping_addresses_by_user(id)}
   end
 
-  # TODO: Fix case user not found
   def get_user_by_id(%{id: id}, _info) do
-    case Accounts.get_user!(id) do
+    case Accounts.get_user(id) do
       nil -> {:error, "User id #{id} not found"}
       user -> {:ok, user}
     end
