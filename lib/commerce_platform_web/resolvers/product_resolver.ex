@@ -27,7 +27,7 @@ defmodule CommercePlatformWeb.Resolvers.ProductResolver do
 
   def get_product_by_id(_, %{id: id}, _info) do
     case Stock.get_product(id) do
-      nil -> {:error, "Product with id: #{id} not found"}
+      nil -> {:error, "Product with id #{id} was not found"}
       product -> {:ok, product}
     end
   end
