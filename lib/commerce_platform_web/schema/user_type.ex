@@ -2,8 +2,6 @@ defmodule CommercePlatformWeb.Schema.Types.UserType do
   use Absinthe.Schema.Notation
   use Absinthe.Ecto, repo: CommercePlatform.Repo
 
-  # alias CommercePlatformWeb.Resolvers
-
   object :user_type do
     field(:id, :id)
     field(:first_name, :string)
@@ -18,6 +16,7 @@ defmodule CommercePlatformWeb.Schema.Types.UserType do
     )
   end
 
+  # TODO agregar los shipping addresses a los input
   input_object :user_input_type do
     field(:first_name, non_null(:string))
     field(:last_name, non_null(:string))
@@ -25,5 +24,6 @@ defmodule CommercePlatformWeb.Schema.Types.UserType do
     field(:phone, :string)
     field(:password, non_null(:string))
     field(:password_confirmation, non_null(:string))
+    field(:membership_type, :integer)
   end
 end
