@@ -10,6 +10,7 @@ defmodule CommercePlatform.Orders.Order do
     field :number, :string
     field :paid, :boolean, default: false
     field :delivery_date, :utc_datetime
+
     belongs_to(:user, User)
     belongs_to(:shipper, Shipper)
     has_many :order_details, OrderDetail
@@ -19,6 +20,7 @@ defmodule CommercePlatform.Orders.Order do
     # TODO generar un numero de order automatico siguiendo diferentes patrones
     # TODO validar que el delivery_date > date_issued
     # TODO Fix user relation
+    # TODO hacer que al crear una orden el order_status sea un valor automatico
     timestamps(type: :utc_datetime)
   end
 

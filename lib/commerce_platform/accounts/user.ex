@@ -20,7 +20,6 @@ defmodule CommercePlatform.Accounts.User do
     has_many :shipping_addresses, ShippingAddress
 
     # TODO: add these fields credit_card, credit_card_type_id
-    # con la referencia al id 1 :none y que sea requerido
 
     timestamps()
   end
@@ -59,6 +58,7 @@ defmodule CommercePlatform.Accounts.User do
     # the changeset. When it’s time, the repository can convert those constraints into a human-readable error
     |> unique_constraint(:email)
     |> hash_password
+    # Assigns a default membership to the user, which will be none, and has the id of 1
     |> put_change(:membership_type_id, 1)
   end
 

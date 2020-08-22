@@ -12,6 +12,8 @@ defmodule CommercePlatform.Accounts.ShippingAddress do
     belongs_to(:user, User)
     belongs_to(:country, Country)
 
+    # TODO decidir como asignar a un usuario una direccion por default
+
     timestamps()
   end
 
