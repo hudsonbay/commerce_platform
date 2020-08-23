@@ -42,5 +42,6 @@ defmodule CommercePlatform.Orders.Order do
     ])
     |> validate_required([:number, :date_issued, :paid, :user_id, :order_status_id])
     |> foreign_key_constraint(:user)
+    |> put_change(:order_status_id, 1)
   end
 end
