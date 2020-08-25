@@ -6,7 +6,6 @@ defmodule CommercePlatform.Orders.Order do
   alias CommercePlatform.Orders.{Shipper, OrderDetail, OrderStatus}
 
   schema "orders" do
-    field :date_issued, :utc_datetime
     field :number, :string
     field :paid, :boolean, default: false
     field :delivery_date, :utc_datetime
@@ -20,7 +19,6 @@ defmodule CommercePlatform.Orders.Order do
     # TODO generar un numero de order automatico siguiendo diferentes patrones
     # TODO validar que el delivery_date > date_issued
     # TODO Fix user relation
-    # TODO hacer que al crear una orden el order_status sea un valor automatico
     timestamps(type: :utc_datetime)
   end
 
@@ -33,15 +31,36 @@ defmodule CommercePlatform.Orders.Order do
     order
     |> cast(attrs, [
       :number,
-      :date_issued,
       :delivery_date,
       :paid,
       :user_id,
       :shipper_id,
       :order_status_id
     ])
-    |> validate_required([:number, :date_issued, :paid, :user_id, :order_status_id])
+    |> validate_required([:paid, :user_id, :order_status_id])
     |> foreign_key_constraint(:user)
-    |> put_change(:order_status_id, 1)
+    # Assign order_status "ON QUEUE" by default
+    |> put_change(:order_status_id, 2)
+    |> generate_number(attrs)
   end
+
+  defp generate_number(changeset, attrs) when attrs == %{}, do: changeset
+
+  defp generate_number(changeset, _attrs) do
+    user_id = get_field(changeset, :user_id)
+
+    issued =
+      String.replace(NaiveDateTime.to_string(NaiveDateTime.utc_now()), [":", "-", ".", " "], "")
+
+    generated_value = Enum.join(["MSBX", user_id, String.reverse(issued)])
+    put_change(changeset, :number, generated_value)
+  end
+
+  # defp generate_number(changeset, _attrs) do
+  #   quantity = get_field(changeset, :quantity) |> Decimal.new()
+  #   unit_price = get_field(changeset, :unit_price)
+  #   cost = Decimal.mult(quantity, unit_price)
+  #   # always based on the current price
+  #   put_change(changeset, :total, cost)
+  # end
 end
