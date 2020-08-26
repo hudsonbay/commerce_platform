@@ -292,7 +292,9 @@ defmodule CommercePlatform.AccountsTest do
     end
 
     test "create_shipping_address/1 with valid data creates a shipping_address" do
-      assert {:ok, %ShippingAddress{} = shipping_address} = Accounts.create_shipping_address(@valid_attrs)
+      assert {:ok, %ShippingAddress{} = shipping_address} =
+               Accounts.create_shipping_address(@valid_attrs)
+
       assert shipping_address.address == "some address"
       assert shipping_address.postal_code == "some postal_code"
     end
@@ -303,21 +305,30 @@ defmodule CommercePlatform.AccountsTest do
 
     test "update_shipping_address/2 with valid data updates the shipping_address" do
       shipping_address = shipping_address_fixture()
-      assert {:ok, %ShippingAddress{} = shipping_address} = Accounts.update_shipping_address(shipping_address, @update_attrs)
+
+      assert {:ok, %ShippingAddress{} = shipping_address} =
+               Accounts.update_shipping_address(shipping_address, @update_attrs)
+
       assert shipping_address.address == "some updated address"
       assert shipping_address.postal_code == "some updated postal_code"
     end
 
     test "update_shipping_address/2 with invalid data returns error changeset" do
       shipping_address = shipping_address_fixture()
-      assert {:error, %Ecto.Changeset{}} = Accounts.update_shipping_address(shipping_address, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Accounts.update_shipping_address(shipping_address, @invalid_attrs)
+
       assert shipping_address == Accounts.get_shipping_address!(shipping_address.id)
     end
 
     test "delete_shipping_address/1 deletes the shipping_address" do
       shipping_address = shipping_address_fixture()
       assert {:ok, %ShippingAddress{}} = Accounts.delete_shipping_address(shipping_address)
-      assert_raise Ecto.NoResultsError, fn -> Accounts.get_shipping_address!(shipping_address.id) end
+
+      assert_raise Ecto.NoResultsError, fn ->
+        Accounts.get_shipping_address!(shipping_address.id)
+      end
     end
 
     test "change_shipping_address/1 returns a shipping_address changeset" do
