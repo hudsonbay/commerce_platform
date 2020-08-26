@@ -21,6 +21,7 @@ alias CommercePlatform.Accounts.MembershipType
 alias CommercePlatform.Stock.Product
 alias CommercePlatform.Accounts.ShippingAddress
 alias CommercePlatform.Orders.OrderStatus
+alias CommercePlatform.Orders.OrderPriority
 alias CommercePlatform.Orders.Shipper
 
 # Load countries
@@ -425,4 +426,20 @@ Repo.insert!(%Shipper{
   website: "https://www.cubapack.com",
   picture: "cpack.jpg",
   country_id: 23
+})
+
+# inserting order priorities
+Repo.insert!(%OrderPriority{
+  name: "Low",
+  description: "Order has a low priority"
+})
+
+Repo.insert!(%OrderPriority{
+  name: "Normal",
+  description: "Order has a normal priority"
+})
+
+Repo.insert!(%OrderPriority{
+  name: "High",
+  description: "Order has a high priority"
 })
