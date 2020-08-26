@@ -3,7 +3,7 @@ defmodule CommercePlatform.Orders.Order do
   import Ecto.Changeset
 
   alias CommercePlatform.Accounts.User
-  alias CommercePlatform.Orders.{Shipper, OrderDetail, OrderStatus}
+  alias CommercePlatform.Orders.{Shipper, OrderDetail, OrderStatus, OrderPriority}
 
   schema "orders" do
     field :number, :string
@@ -14,11 +14,10 @@ defmodule CommercePlatform.Orders.Order do
     belongs_to(:shipper, Shipper)
     has_many :order_details, OrderDetail
     belongs_to(:order_status, OrderStatus)
+    belongs_to(:order_priority, OrderPriority)
 
     # TODO add priority, default:normal
-    # TODO generar un numero de order automatico siguiendo diferentes patrones
     # TODO validar que el delivery_date > date_issued
-    # TODO Fix user relation
     timestamps(type: :utc_datetime)
   end
 
@@ -35,32 +34,39 @@ defmodule CommercePlatform.Orders.Order do
       :paid,
       :user_id,
       :shipper_id,
-      :order_status_id
+      :order_status_id,
+      :order_priority_id
     ])
-    |> validate_required([:paid, :user_id, :order_status_id])
+    |> validate_required([:paid, :user_id])
     |> foreign_key_constraint(:user)
+    |> foreign_key_constraint(:order_status)
+    |> foreign_key_constraint(:order_priority)
     # Assign order_status "ON QUEUE" by default
     |> put_change(:order_status_id, 2)
+    |> add_priority()
     |> generate_number(attrs)
+  end
+
+  defp add_priority(changeset) do
+    # validate type of priority of some client. In the meanwhile the priority will be NORMAL
+    put_change(changeset, :order_priority_id, 2)
   end
 
   defp generate_number(changeset, attrs) when attrs == %{}, do: changeset
 
   defp generate_number(changeset, _attrs) do
-    user_id = get_field(changeset, :user_id)
+    user_id =
+      changeset
+      |> get_field(:user_id)
 
     issued =
-      String.replace(NaiveDateTime.to_string(NaiveDateTime.utc_now()), [":", "-", ".", " "], "")
+      NaiveDateTime.utc_now()
+      |> NaiveDateTime.to_string()
+      |> String.replace([":", "-", ".", " "], "")
 
     generated_value = Enum.join(["MSBX", user_id, String.reverse(issued)])
-    put_change(changeset, :number, generated_value)
-  end
 
-  # defp generate_number(changeset, _attrs) do
-  #   quantity = get_field(changeset, :quantity) |> Decimal.new()
-  #   unit_price = get_field(changeset, :unit_price)
-  #   cost = Decimal.mult(quantity, unit_price)
-  #   # always based on the current price
-  #   put_change(changeset, :total, cost)
-  # end
+    changeset
+    |> put_change(:number, generated_value)
+  end
 end
