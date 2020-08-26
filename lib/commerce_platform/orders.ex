@@ -6,7 +6,9 @@ defmodule CommercePlatform.Orders do
   import Ecto.Query, warn: false
   alias CommercePlatform.Repo
 
-  alias CommercePlatform.Orders.Order
+  alias CommercePlatform.Orders.{Order, OrderStatus, OrderPriority}
+
+  # alias CommercePlatform.Accounts.User
 
   @doc """
   Returns the list of orders.
@@ -18,7 +20,11 @@ defmodule CommercePlatform.Orders do
 
   """
   def list_orders do
-    Repo.all(Order)
+    Order
+    |> Repo.all()
+    |> Repo.preload(:user)
+    |> Repo.preload(:order_status)
+    |> Repo.preload(:order_priority)
   end
 
   @doc """
@@ -388,5 +394,101 @@ defmodule CommercePlatform.Orders do
   """
   def change_order_state(%OrderStatus{} = order_state, attrs \\ %{}) do
     OrderStatus.changeset(order_state, attrs)
+  end
+
+  alias CommercePlatform.Orders.OrderPriority
+
+  @doc """
+  Returns the list of order_priorities.
+
+  ## Examples
+
+      iex> list_order_priorities()
+      [%OrderPriority{}, ...]
+
+  """
+  def list_order_priorities do
+    Repo.all(OrderPriority)
+  end
+
+  @doc """
+  Gets a single order_priority.
+
+  Raises `Ecto.NoResultsError` if the Order priority does not exist.
+
+  ## Examples
+
+      iex> get_order_priority!(123)
+      %OrderPriority{}
+
+      iex> get_order_priority!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_order_priority!(id), do: Repo.get!(OrderPriority, id)
+
+  @doc """
+  Creates a order_priority.
+
+  ## Examples
+
+      iex> create_order_priority(%{field: value})
+      {:ok, %OrderPriority{}}
+
+      iex> create_order_priority(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_order_priority(attrs \\ %{}) do
+    %OrderPriority{}
+    |> OrderPriority.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a order_priority.
+
+  ## Examples
+
+      iex> update_order_priority(order_priority, %{field: new_value})
+      {:ok, %OrderPriority{}}
+
+      iex> update_order_priority(order_priority, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_order_priority(%OrderPriority{} = order_priority, attrs) do
+    order_priority
+    |> OrderPriority.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a order_priority.
+
+  ## Examples
+
+      iex> delete_order_priority(order_priority)
+      {:ok, %OrderPriority{}}
+
+      iex> delete_order_priority(order_priority)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_order_priority(%OrderPriority{} = order_priority) do
+    Repo.delete(order_priority)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking order_priority changes.
+
+  ## Examples
+
+      iex> change_order_priority(order_priority)
+      %Ecto.Changeset{data: %OrderPriority{}}
+
+  """
+  def change_order_priority(%OrderPriority{} = order_priority, attrs \\ %{}) do
+    OrderPriority.changeset(order_priority, attrs)
   end
 end
