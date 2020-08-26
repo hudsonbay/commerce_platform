@@ -11,14 +11,12 @@ defmodule CommercePlatformWeb.Schema.Types.OrderType do
     field(:paid, :boolean)
     field(:user, :user_type, resolve: assoc(:user))
     field(:order_status, :order_status_type, resolve: assoc(:order_status))
+    field(:order_priority, :order_priority_type, resolve: assoc(:order_priority))
     # field(:shipper, :shipper_type, resolve: assoc(:shipper))
   end
 
   input_object :order_input_type do
-    field(:delivery_date, :datetime)
     field(:paid, non_null(:boolean))
     field(:user_id, non_null(:id))
-    field(:order_status_id, non_null(:id))
-    # field(:shipper_id, :id)
   end
 end
