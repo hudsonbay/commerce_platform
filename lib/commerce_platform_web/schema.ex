@@ -36,6 +36,8 @@ defmodule CommercePlatformWeb.Schema do
     @desc "Get a list of all available products (in stock)"
     field :available_products, list_of(:product_type) do
       arg(:matching, :string)
+      # additional options
+      arg(:order, type: :sort_order, default_value: :asc)
       resolve(&Resolvers.ProductResolver.available_products/3)
     end
 
