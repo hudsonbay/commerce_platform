@@ -300,4 +300,65 @@ defmodule CommercePlatform.OrdersTest do
       assert %Ecto.Changeset{} = Orders.change_order_state(order_state)
     end
   end
+
+  describe "order_priorities" do
+    alias CommercePlatform.Orders.OrderPriority
+
+    @valid_attrs %{description: "some description", name: "some name"}
+    @update_attrs %{description: "some updated description", name: "some updated name"}
+    @invalid_attrs %{description: nil, name: nil}
+
+    def order_priority_fixture(attrs \\ %{}) do
+      {:ok, order_priority} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Orders.create_order_priority()
+
+      order_priority
+    end
+
+    test "list_order_priorities/0 returns all order_priorities" do
+      order_priority = order_priority_fixture()
+      assert Orders.list_order_priorities() == [order_priority]
+    end
+
+    test "get_order_priority!/1 returns the order_priority with given id" do
+      order_priority = order_priority_fixture()
+      assert Orders.get_order_priority!(order_priority.id) == order_priority
+    end
+
+    test "create_order_priority/1 with valid data creates a order_priority" do
+      assert {:ok, %OrderPriority{} = order_priority} = Orders.create_order_priority(@valid_attrs)
+      assert order_priority.description == "some description"
+      assert order_priority.name == "some name"
+    end
+
+    test "create_order_priority/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Orders.create_order_priority(@invalid_attrs)
+    end
+
+    test "update_order_priority/2 with valid data updates the order_priority" do
+      order_priority = order_priority_fixture()
+      assert {:ok, %OrderPriority{} = order_priority} = Orders.update_order_priority(order_priority, @update_attrs)
+      assert order_priority.description == "some updated description"
+      assert order_priority.name == "some updated name"
+    end
+
+    test "update_order_priority/2 with invalid data returns error changeset" do
+      order_priority = order_priority_fixture()
+      assert {:error, %Ecto.Changeset{}} = Orders.update_order_priority(order_priority, @invalid_attrs)
+      assert order_priority == Orders.get_order_priority!(order_priority.id)
+    end
+
+    test "delete_order_priority/1 deletes the order_priority" do
+      order_priority = order_priority_fixture()
+      assert {:ok, %OrderPriority{}} = Orders.delete_order_priority(order_priority)
+      assert_raise Ecto.NoResultsError, fn -> Orders.get_order_priority!(order_priority.id) end
+    end
+
+    test "change_order_priority/1 returns a order_priority changeset" do
+      order_priority = order_priority_fixture()
+      assert %Ecto.Changeset{} = Orders.change_order_priority(order_priority)
+    end
+  end
 end
