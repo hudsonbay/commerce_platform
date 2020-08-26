@@ -13,4 +13,5 @@ defmodule CommercePlatformWeb.Schema.Types do
   import_types(Types.CountryType)
   import_types(Types.ShippingAddressType)
   import_types(Types.OrderStatusType)
+  import_types(Types.OrderPriorityType)
 end
