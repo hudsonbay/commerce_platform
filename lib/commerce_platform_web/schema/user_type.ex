@@ -24,6 +24,5 @@ defmodule CommercePlatformWeb.Schema.Types.UserType do
     field(:phone, :string)
     field(:password, non_null(:string))
     field(:password_confirmation, non_null(:string))
-    field(:membership_type, :integer)
   end
 end
